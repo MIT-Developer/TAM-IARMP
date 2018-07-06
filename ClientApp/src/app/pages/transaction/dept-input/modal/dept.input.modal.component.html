@@ -1,0 +1,19 @@
+<nb-card>
+  <nb-card-header>Input Department KPI</nb-card-header>
+  <nb-card-body>
+    
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.description"></textarea>
+        </div>
+      </div>
+
+
+          <button type="submit" [disabled]="formData.description==''" class="btn btn-danger" (click)="submit()">Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+
+
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-header>Reminder Manual</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="sendmail()">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Type</label>
+          <input type="text" class="form-control" name="Type" placeholder="Type" [(ngModel)]="formData.typeSend">
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Body</label>
+          <textarea rows="3" type="text" class="form-control" name="Body" placeholder="Body" [(ngModel)]="formData.bodySend"></textarea>
+        </div>
+      </div>
+      
+          <button type="submit" class="btn btn-danger">Send Email</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<!-- { COUNTER_NO: 1, YEAR_ACTIVE: "2018", DESCRIPTION: "hehehe", CONDITION: "IMP", INDICATOR_name: "IMP001", SCORE: 123 }, -->

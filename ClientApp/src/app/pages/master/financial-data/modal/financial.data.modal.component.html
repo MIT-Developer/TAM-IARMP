@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header>Input Financial Data</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.description"></textarea>
+        </div>
+      </div>
+
+      <div class="col-sm-auto">
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger">Submit</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,14 @@
+.chart-container {
+  position: inherit;
+  height: 520px;
+  width: 520px;
+  margin-top: 5px;
+}
+#arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+
+  border-bottom: 30px solid red;
+}

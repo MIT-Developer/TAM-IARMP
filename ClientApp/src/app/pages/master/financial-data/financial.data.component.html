@@ -1,0 +1,146 @@
+<nb-card>
+  <nb-card-header>Financial Data</nb-card-header>
+  <nb-card-body>
+
+    <div class="form-group row">
+      <label for="year" class="col-sm-1 col-form-label">Periode</label>
+      <div class="col-sm-2">
+        <select class="form-control" [(ngModel)]="yearPeriode" required (change)="reload()">
+          <option *ngFor="let data of year" value="{{data.data}}">{{data.data}}</option>
+        </select>
+      </div>
+
+      <nb-actions size="small">
+        <nb-action icon="ion-help" nbPopoverMode="hover" nbPopover="Master untuk memasukkan data tahunan financial TAM">?</nb-action>
+      </nb-actions>
+
+    </div>
+
+
+    <nb-card>
+      <nb-card-header>Input Data</nb-card-header>
+      <nb-card-body>
+        <div class="row full-name-inputs">
+          <div class="col-sm-4">
+            <label>Cash\cash Equivalent</label><font color="red">*</font>
+            <input class="form-control" [(ngModel)]="data.cashCashEquivalent" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Net Working Capital</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.netWorkingCapital" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+          </div>
+
+
+
+          <div class="col-sm-4">
+            <label>Fixed Assets</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.fixedAssets" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Other Assets</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.otherAssets" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Other Liabilities</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.otherLiabilities" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Minority Interest BS</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.minorityInterest" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+          <div class="col-sm-4">
+            <label>Equity</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.equity" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Revenue</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.revenue" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+          <div class="col-sm-4">
+            <label>Cost Of Revenue</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.costOfRevenue" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Operating Expenses</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.operatingExpenses" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Non Operating Income\Charges</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.nonOperatingIncome" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Tax Expense</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.taxExpense" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Dividend</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.dividend" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Operating Profit</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.operatingProfit" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Net Income Profit</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.netIncomeProfit" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Operating Cash Flow</label><font color="red">*</font>
+            <input step="0.01" class="form-control" [(ngModel)]="data.operatingCashFlow" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }">
+
+          </div>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+
+
+    <div class="col-sm-auto row">
+      <div class="col-sm-auto">
+        <div class="form-group">
+          <button type="submit" class="btn btn-hero-primary " [disabled]="buttonDisable" (click)="submit()">Submit</button>
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+</nb-card>

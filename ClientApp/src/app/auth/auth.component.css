@@ -1,0 +1,31 @@
+#tam-sso {
+  color: #fff;
+  background-color: #CC0400;
+  border: 1px solid #7F0200;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#tam-sso:hover {
+  background-color: #BF0400;
+  cursor: pointer
+}
+
+#tam-sso img {
+  vertical-align: middle;
+  margin-right: 8px
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+#middle_box_logo {
+  width: 100%
+}

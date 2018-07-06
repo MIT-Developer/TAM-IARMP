@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header>Input Risk Indicator {{getTitle(formData.condition)}} </nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label><font color="red">*</font>
+          <input type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.description">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Score</label><font color="red">*</font>
+          <input type="text" class="form-control" name="score" placeholder="100" [disabled]="formData.scoreDisable" [(ngModel)]="formData.score">
+        </div>
+      </div>
+      
+          <button type="submit" [disabled]="formData.description==''" class="btn btn-danger" >Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<!-- { COUNTER_NO: 1, YEAR_ACTIVE: "2018", DESCRIPTION: "hehehe", CONDITION: "IMP", INDICATOR_name: "IMP001", SCORE: 123 }, -->

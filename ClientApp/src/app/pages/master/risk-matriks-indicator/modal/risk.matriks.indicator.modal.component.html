@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>Input Risk Matriks Indicator {{getTitle(formData.condition)}}</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+      <div class="form-group">
+        <div class="col-sm-2">
+          <label>Condition A</label><font color="red">*</font>
+          <select class="form-control" name="Condition A" required [(ngModel)]="formData.indicatorIdA">
+            <option *ngFor="let data of data.A" value="{{data.indicatorId}}">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <label>Condition B</label><font color="red">*</font>
+          <select class="form-control" name="Condition B" required [(ngModel)]="formData.indicatorIdB">
+            <option *ngFor="let data of data.B" value="{{data.indicatorId}}">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <label>Result</label><font color="red">*</font>
+          <select class="form-control" name="Result" required [(ngModel)]="formData.resultIdC">
+            <option *ngFor="let data of data.C" value="{{data.indicatorId}}">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      
+          <button type="submit"[disabled]="formData.resultIdC==''||formData.indicatorIdB==''||formData.indicatorIdA==''" class="btn btn-danger">Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<!-- { COUNTER_NO: 1, YEAR_ACTIVE: "2018", DESCRIPTION: "hehehe", CONDITION: "IMP", INDICATOR_name: "IMP001", SCORE: 123 }, -->

@@ -1,0 +1,492 @@
+<nb-card>
+  <nb-card-header>Report</nb-card-header>
+  <nb-card-body>
+    <!-- <div class="form-group row">
+      <label class="col-md-2">Periode</label>
+      <div class="col-sm-2">
+
+        <select class="form-control" [(ngModel)]="yearPeriode" (change)="reload()">
+          <option *ngFor="let data of year" value="{{data.data}}">{{data.data}}</option>
+        </select>
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <label class="col-md-2 mt-3">Division</label>
+      <div class="col-md-4">
+        <!-- <input type="text" class="form-control" ngModel name="yearPeriode" (change)="reload()"> -->
+        <select class="form-control" name="division" [(ngModel)]="division" (change)="filterDepartment()">
+          <option *ngFor="let data of divisionData" value="{{data.charId}}">{{data.description}}</option>
+        </select>
+      </div>
+      <label class="col-md-2 mt-3">Department</label>
+      <div class="col-md-4">
+        <select class="form-control" name="department" [(ngModel)]="department" (change)="reload()">
+          <option *ngFor="let data of departmentFilter" value="{{data.kodeDepartment}}">{{data.department}}</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="form-group mr-1">
+        <button class="btn btn-hero-primary" (click)="print('print_tab1')">Print Chart</button>
+      </div>
+      <div class="form-group mr-1">
+        <button class="btn btn-hero-primary" (click)="print('print_tab2')">Print Report</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-hero-primary" (click)="showModal()" [disabled]="canApprove()">Approval</button>
+      </div>
+    </div>
+
+    <nb-tabset>
+      <nb-tab tabTitle="Chart">
+        <div class="printclass" id="print_tab1">
+          <label> </label>
+          <div class="form-group ml-3 mt-2 row">
+            <img width="42px" height="42px" src="data:image/jpeg;base64,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"
+              alt="" />
+            <p class="ml-2" style="font-family: 'arial black', 'avant garde';font-size: 13pt; color: #ff0000;">
+              PT. TOYOTA-ASTRA MOTOR
+              <br>
+              <font color="black">Summary Risk Register Report</font>
+            </p>
+
+          </div>
+
+          <div class="row">
+            <div class="col">
+
+              <font size="2" class="float-left">
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td width="30%">
+                        <b> Division</b>
+                      </td>
+                      <td>
+                        {{tabledata[0]!=null?tabledata[0].descDivision:null}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="30%">
+                        <b> Department</b>
+                      </td>
+                      <td>
+                        {{tabledata[0]!=null?tabledata[0].descDepartment:null}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>
+                        <b> Number Of Risk</b>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{tabledata.length}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </font>
+            </div>
+            <div class="col" style="opacity: 0;">
+              <font size="2">
+                <table class="table table-bordered ml-2">
+                  <thead>
+                    <tr>
+                      <th>
+                        <b> Number Of Risk</b>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{tabledata.length}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </font>
+            </div>
+            <div class="col">
+              <font size="2" class="float-right">
+                <table class="table table-bordered ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <b> Approved&nbsp;By</b>
+                      </th>
+                      <th>
+                        <b>Prepared&nbsp;By</b>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td width="450" height="100"> </td>
+                      <td width="150" height="100"> </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </font>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <canvas id="liveDemoCanvas" width="870px" height="780px"></canvas>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="row">
+                <ngx-chartjs-bar [dataset]="chartDivDept" class="col-sm-12" style="width:870px;height:390px"></ngx-chartjs-bar>
+              </div>
+              <div class="row ml-1 mr-1">
+                <ngx-chartjs-pie [dataset]="chartDivDept" class="col-sm-6" style="width:560px;height:380px"></ngx-chartjs-pie>
+                <ngx-control-mapping [dataset]="chartDivDept" class="col-sm-6" style="width:560px;height:380px"></ngx-control-mapping>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div>
+            <app-chart style="display: none;" data-html2canvas-ignore (svg)="savesvg($event)" [heat]="tabledata"></app-chart>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <font size="1">
+                <table class="table table-bordered">
+
+
+                  <thead>
+                    <tr>
+                      <th bgcolor="FF33A8" width="70px" style="text-align:center">No</th>
+                      <th bgcolor="FF33A8" width="100px" style="text-align:center">Risk&nbsp;No</th>
+                      <th bgcolor="FF33A8" style="text-align:center">Loss&nbsp;Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of riskArr">
+                      <td>{{ item.no }}</td>
+                      <td>{{ item.riskNo }}</td>
+                      <td>{{ item.lossEvent }}</td>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+              </font>
+            </div>
+
+            <div class="row col-sm-6">
+
+              <table class="table table-bordered col-sm-3" style="font-size: 10px">
+
+                <thead>
+                  <tr>
+
+                    <th bgcolor="#a9d9bc" style="text-align:center" colspan="3">Effective</th>
+
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th style="width:80%">Risk&nbsp;No</th>
+                    <th style="width:10%">Before</th>
+                    <th style="width:10%">After</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of effectivedata">
+                    <td style="width:80%">{{ item.riskNo }}</td>
+                    <td style="width:10%">{{ item.irOverall }}</td>
+                    <td style="width:10%">{{ item.rdOverall }}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+
+
+              <table class="table table-bordered col-sm-3" style="font-size: 10px">
+
+                <thead>
+                  <tr>
+
+                    <th bgcolor="#ECFF00" style="text-align:center" colspan="3">Moderate</th>
+
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th style="width:80%">Risk&nbsp;No</th>
+                    <th style="width:10%">Before</th>
+                    <th style="width:10%">After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of moderatedata">
+                    <td style="width:80%">{{ item.riskNo }}</td>
+                    <td style="width:10%">{{ item.irOverall }}</td>
+                    <td style="width:10%">{{ item.rdOverall }}</td>
+
+                  </tr>
+                </tbody>
+
+              </table>
+
+
+              <table class="table table-bordered col-sm-3" style="font-size: 10px">
+
+                <thead>
+                  <tr>
+
+                    <th bgcolor="#F02602" style="text-align:center" colspan="3">Ineffective</th>
+
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th style="width:80%">Risk&nbsp;No</th>
+                    <th style="width:10%">Before</th>
+                    <th style="width:10%">After</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of ineffectivedata">
+                    <td style="width:80%">{{ item.riskNo }}</td>
+                    <td style="width:10%">{{ item.irOverall }}</td>
+                    <td style="width:10%">{{ item.rdOverall }}</td>
+
+                  </tr>
+                </tbody>
+
+              </table>
+
+
+              <table class="table table-bordered col-sm-3" style="font-size: 10px">
+
+                <thead>
+                  <tr>
+
+                    <th bgcolor="#ec7ea3" style="text-align:center" colspan="3">Weak</th>
+
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th style="width:80%">Risk&nbsp;No</th>
+                    <th style="width:10%">Before</th>
+                    <th style="width:10%">After</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of weakdata">
+                    <td style="width:80%">{{ item.riskNo }}</td>
+                    <td style="width:10%">{{ item.irOverall }}</td>
+                    <td style="width:10%">{{ item.rdOverall }}</td>
+
+                  </tr>
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
+      </nb-tab>
+      <nb-tab tabTitle="List Report">
+        <div class="printclass2" id="print_tab2">
+          <label> </label>
+          <div class="form-group ml-3 mt-2 row">
+            <img width="42px" height="42px" src="data:image/jpeg;base64,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"
+              alt="" />
+            <p class="ml-2" style="font-family: 'arial black', 'avant garde';font-size: 13pt; color: #ff0000;  ">
+              PT. TOYOTA-ASTRA MOTOR
+              <br>
+              <font color="black">Risk Register Report</font>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col">
+              <font size="2" class="float-left">
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td width="30%">
+                        <b> Division</b>
+                      </td>
+                      <td>
+                        {{fullDataList[0]!=null?fullDataList[0].descDivision:null}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="30%">
+                        <b> Department</b>
+                      </td>
+                      <td>
+                        {{fullDataList[0]!=null?fullDataList[0].descDepartment:null}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </font>
+            </div>
+
+            <div class="col">
+              <font size="2" class="float-right">
+                <table class="table table-bordered ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <b> Approved&nbsp;By</b>
+                      </th>
+                      <th>
+                        <b>Prepared&nbsp;By</b>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td width="450" height="100"> </td>
+                      <td width="150" height="100"> </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </font>
+            </div>
+          </div>
+
+          <div class="print_report">
+            <font size="4">
+              <table class="table table-bordered">
+
+                <thead>
+                  <tr>
+                    <th bgcolor="cyan" style="text-align:center" colspan="2">Division/Dept</th>
+
+                    <th bgcolor="purple" style="text-align:center" colspan="3">
+                      <font color="white">Risk&nbsp;Description</font>
+                    </th>
+
+
+                    <th bgcolor="light blue" style="text-align:center" colspan="3">
+                      <font color="white">Inherent&nbsp;Risk</font>
+                    </th>
+
+                    <th bgcolor="orange" style="text-align:center" colspan="1">
+                      <font color="white">Control</font>
+                    </th>
+
+                    <th bgcolor="yellow" style="text-align:center" colspan="3">Residual&nbsp;Risk</th>
+
+
+                    <th bgcolor="green" style="text-align:center" colspan="5">
+                      <font color="white">Expected&nbsp;Risk</font>
+                    </th>
+
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th width="100px" style="text-align:center">Risk No</th>
+                    <th width="100px" style="text-align:center">Department KPI</th>
+                    <th width="200px" style="text-align:center">Loss Event</th>
+                    <th width="200px" style="text-align:center">Cause</th>
+                    <th width="100px" style="text-align:center">Risk&nbsp;Impact</th>
+                    <th width="100px" style="text-align:center">Impact</th>
+                    <th width="100px" style="text-align:center">Likelihood</th>
+                    <th width="100px" style="text-align:center">Overall</th>
+                    <th width="200px" style="text-align:center">Control</th>
+                    <th width="100px" style="text-align:center">Impact</th>
+                    <th width="100px" style="text-align:center">Likelihood</th>
+                    <th width="100px" style="text-align:center">Overall</th>
+                    <th width="150px" style="text-align:center">Treatment Plan</th>
+                    <th width="100px" style="text-align:center">Impact</th>
+                    <th width="100px" style="text-align:center">Likelihood</th>
+                    <th width="100px" style="text-align:center">Overall</th>
+                    <th width="100px" style="text-align:center">Schedule</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of fullDataList">
+                    <td>{{ item.riskNo }}</td>
+                    <td>{{ item.departmentKpi }}</td>
+                    <td>{{ item.lossEvent }}</td>
+                    <td>
+                      <div *ngFor="let data of insertSpace2(item.caused)">
+                        {{data}}
+                        <br>
+                      </div>
+                    </td>
+                    <td>{{ item.riskImpact}}</td>
+                    <td style="text-align:center">{{ item.irImpact }}</td>
+                    <td style="text-align:center">{{ item.irLikelihood }}</td>
+                    <td [ngStyle]="{'background-color': item.irOverall=='Extreme'?'red':
+                    item.irOverall=='High'?'#FF69B4':
+                    item.irOverall=='Medium'?'yellow':
+                    item.irOverall=='Low'?'#87CEFA': 'gainsboro'}" style="text-align:center">{{ item.irOverall }}</td>
+                    <td>
+                      <div *ngFor="let data of insertSpace2(item.control)">
+                        {{data}}
+                        <br>
+                      </div>
+                    </td>
+                    <td style="text-align:center">{{ item.rdImpact }}</td>
+                    <td style="text-align:center">{{ item.rdLikelihood }}</td>
+                    <td [ngStyle]="{'background-color': item.rdOverall=='Extreme'?'red':
+                    item.rdOverall=='High'?'#FF69B4':
+                    item.rdOverall=='Medium'?'yellow':
+                    item.rdOverall=='Low'?'#87CEFA': 'gainsboro'}" style="text-align:center">{{ item.rdOverall }}</td>
+                    <td>
+                      <div *ngFor="let data of insertSpace(item.treatmentPlan)">
+                        {{data}}
+                        <br>
+                      </div>
+                    </td>
+                    <td style="text-align:center">{{ item.exImpact }}</td>
+                    <td style="text-align:center">{{ item.exLikelihood }}</td>
+                    <td [ngStyle]="{'background-color': item.exOverall=='Extreme'?'red':
+                    item.exOverall=='High'?'#FF69B4':
+                    item.exOverall=='Medium'?'yellow':
+                    item.exOverall=='Low'?'#87CEFA': 'gainsboro'}" style="text-align:center">{{ item.exOverall }}</td>
+                    <td>
+                      <div *ngFor="let data of insertSpace(item.exDueDate)">
+                        {{data}}
+                        <br>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </font>
+          </div>
+        </div>
+      </nb-tab>
+      <nb-tabset>
+
+        <nb-card-body>
+          <nb-card>

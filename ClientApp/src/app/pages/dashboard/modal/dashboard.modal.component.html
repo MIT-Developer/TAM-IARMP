@@ -1,0 +1,143 @@
+<nb-card>
+  <nb-card-header>Detail Risk</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-lg-6">
+        <h5>Inherent Risk</h5>
+        <div *ngIf="formData.finAmountIr>0 && formData.finImpactCategory" class="mt-1">
+          <h6>Financial Impact</h6>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Category
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{filterFin()}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Amount
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',precision:'0' }"
+                [(ngModel)]="formData.finAmountIr">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.opAmountIr>0 && formData.opImpactCategory" class="mt-1">
+          <h6>Operational Impact</h6>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Category
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{filterOp()}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Amount
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',precision:'0' }"
+                [(ngModel)]="formData.opAmountIr">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.qlImpactIr" class="mt-3">
+
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Qualitative Impact
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{formData.qlImpactIr}}">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.irLikelihood" class="mt-1">
+
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Likelihood
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{formData.irLikelihood}}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h5>Residual Risk</h5>
+        <div *ngIf="formData.finAmountRd>0 && formData.finImpactCategory" class="mt-1">
+          <h6>Financial Impact</h6>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Category
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{filterFin()}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Amount
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',precision:'0' }"
+                [(ngModel)]="formData.finAmountRd">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.opAmountRd>0 && formData.opImpactCategory" class="mt-1">
+          <h6>Operational Impact</h6>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Category
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{filterOp()}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Amount
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',precision:'0' }"
+                [(ngModel)]="formData.opAmountRd">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.qlImpactRd" class="mt-3">
+
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Qualitative Impact
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{formData.qlImpactRd}}">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formData.rdLikelihood" class="mt-1">
+
+          <div class="form-group row">
+            <label class="col-md-2 mt-3">Likelihood
+            </label>
+            <div class="col-md-6">
+
+              <input disabled type="text" class="form-control" style="text-align:right;" value="{{formData.rdLikelihood}}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+
+
+
+  </nb-card-body>
+</nb-card>

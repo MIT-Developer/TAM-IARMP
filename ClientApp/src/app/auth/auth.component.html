@@ -1,0 +1,50 @@
+<ngx-one-column-layout>
+  <router-outlet>
+    <div class="center">
+      <nb-card>
+        <nb-card-body>
+          <div style="height: 100%;">
+            <div class="middle_box_container">
+              <div id="middle_box_logo">
+                <img style="width:100%" src="https://tones.toyota.astra.co.id/css/images/logo.png" />
+              </div>
+              <div id="middle_box">
+                <div class="header">
+                  <h2 align="center">Risk & Control</h2>
+
+                </div>
+
+                <div class="body">
+
+                  <form method="post" id="FormLogin">
+                    <button type="button" id="tam-sso" (click)="authSso('DIV_HEAD')">
+                      <img src="https://passport.toyota.astra.co.id/tam.png">Login as Div Head</button>
+                    <button type="button" id="tam-sso" (click)="authSso('DEPT_HEAD')">
+                      <img src="https://passport.toyota.astra.co.id/tam.png">Login as Dept Head</button>
+                    <button type="button" id="tam-sso" (click)="authSso('RISK_ADMIN')">
+                      <img src="https://passport.toyota.astra.co.id/tam.png">Login as Risk Admin</button>
+                    <style>
+                      #tam-sso {
+                        padding: 6px !important;
+                        width: 100%;
+                      }
+
+                      #tam-sso img {
+                        display: inline-block !important;
+                        width: auto !important;
+                        margin-bottom: 0 !important;
+                      }
+
+                    </style>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </nb-card-body>
+
+      </nb-card>
+    </div>
+  </router-outlet>
+</ngx-one-column-layout>

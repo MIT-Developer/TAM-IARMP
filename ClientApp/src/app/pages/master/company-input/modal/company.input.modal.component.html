@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header>Input {{getTitle(formData.condition)}}</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label><font color="red">*</font>
+          <textarea type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.description"></textarea>
+        </div>
+      </div>
+
+          <button type="submit" class="btn btn-danger" [disabled]="formData.description==''">Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+    </form>
+  </nb-card-body>
+</nb-card>

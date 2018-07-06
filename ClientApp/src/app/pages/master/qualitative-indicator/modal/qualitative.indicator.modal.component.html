@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>Input Qualitative Indicator</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Periode</label>
+          <input type="text" disabled class="form-control" [(ngModel)]="formData.YEAR_ACTIVE" name="periode">
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="form-group">
+          <label>Condition</label>
+          <input type="email" disabled class="form-control" name="condition" [(ngModel)]="formData.CONDITION">
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.DESCRIPTION">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Score</label>
+          <input type="text" class="form-control" name="score" placeholder="100" [(ngModel)]="formData.SCORE">
+        </div>
+      </div>
+      <div class="col-sm-auto">
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger">Submit</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<!-- { COUNTER_NO: 1, YEAR_ACTIVE: "2018", DESCRIPTION: "hehehe", CONDITION: "IMP", INDICATOR_name: "IMP001", SCORE: 123 }, -->

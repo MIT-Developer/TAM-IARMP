@@ -1,0 +1,83 @@
+<nb-card>
+  <nb-card-header>Risk Overview</nb-card-header>
+  <nb-card-body>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" >Division</label>
+    <div class="col-sm-5">
+      <!-- <input type="text" class="form-control" ngModel name="yearPeriode" (change)="reload()"> -->
+      <select class="form-control" name="division" ngModel required (change)="reload()">
+        <option *ngFor="let data of division" value="{{data.data}}">{{data.desc}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Department</label>
+    <div class="col-sm-5">
+      <select class="form-control" name="department" ngModel required (change)="reload()">
+        <option *ngFor="let data of department" value="{{data.data}}">{{data.desc}}</option>
+      </select>
+    </div>
+
+</div>
+      <div class="col-sm-auto">
+        <div class="form-group row">
+            <div class="col-sm-4">
+          <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="submit($event)">
+          </ng2-smart-table>
+</div>
+          <div class="horizontal-scroll col-sm-4 ">
+            <table class="table table-condensed">
+              <font size="1">
+              <thead>
+              <tr>
+                <th>Financial</th>
+                <th>Operational</th>
+                <th>Qualitative</th>
+                <th>Likelihood</th>
+                <th>Overall</th>
+                <th>Financial</th>
+                <th>Operational</th>
+                <th>Qualitative</th>
+                <th>Likelihood</th>
+                <th>Overall</th>
+                <th>Impact</th>
+                <th>Likelihood</th>
+                <th>Overall</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of tabledata">
+                <td>{{ item.finImpactIr }}</td>
+                <td>{{ item.opImpactIr }}</td>
+                <td>{{ item.qlImpactIr }}</td>
+                <td>{{ item.irLikelihood }}</td>
+                <td>{{ item.irOverall }}</td>
+                <td>{{ item.finImpactRd }}</td>
+                <td>{{ item.opImpactRd }}</td>
+                <td>{{ item.qlImpactRd }}</td>
+                <td>{{ item.rdLikelihood }}</td>
+                <td>{{ item.rdOverall }}</td>
+                <td>{{ item.exImpact }}</td>
+                <td>{{ item.exLikelihood }}</td>
+                <td>{{ item.exOverall }}</td>
+              </tr>
+              </tbody>
+            </font>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-auto row">
+        <!-- <div class="col-sm-auto">
+          <div class="form-group">
+            <button type="submit" class="btn btn-hero-primary ">Submit</button>
+          </div>
+        </div> -->
+        <div class="col-sm-auto">
+          <div class="form-group">
+            <button type="button" class="btn btn-hero-primary " [disabled]="buttonDisable" >Add New</button>
+          </div>
+        </div>
+      </div>
+  </nb-card-body>
+</nb-card>

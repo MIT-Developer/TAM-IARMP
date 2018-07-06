@@ -1,0 +1,263 @@
+<nb-card>
+  <nb-card-header>
+    <div class="form-group row">
+      <div class="col-lg-8">
+        Risk Overview
+      </div>
+
+      <div *ngIf="!canSubmit()" class="col-sm-3">
+        Status: {{this.riskStatus}}
+      </div>
+      <nb-actions *ngIf="!canSubmit()" size="medium">
+        <nb-action nbPopoverMode="hover" [nbPopover]="popoverStatus" icon="nb-email"></nb-action>
+      </nb-actions>
+
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="col-md-12">
+
+      <div class="form-group row">
+        <label class="col-md-2">Periode</label>
+        <div class="col-sm-2">
+          <!-- <input type="text" class="form-control" ngModel name="yearPeriode" (change)="reload()"> -->
+          <select class="form-control" [(ngModel)]="yearPeriode" required (change)="reload()">
+            <option *ngFor="let data of year" value="{{data.data}}">{{data.data}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 mt-3">Division</label>
+        <div class="col-md-4">
+          <!-- <input type="text" class="form-control" ngModel name="yearPeriode" (change)="reload()"> -->
+          <select class="form-control" name="division" [(ngModel)]="division" (change)="filterDepartment()">
+            <option *ngFor="let data of divisionData" value="{{data.charId}}">{{data.description}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 mt-3">Department</label>
+        <div class="col-md-4">
+          <select class="form-control" name="department" [(ngModel)]="department" (change)="reload()">
+            <option *ngFor="let data of departmentFilter" value="{{data.kodeDepartment}}">{{data.department}}</option>
+          </select>
+        </div>
+       
+
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-auto">
+          <button class="btn btn-hero-primary" (click)="exportAsExcelFile('tam.xlsx')">Download Excel</button>
+        </div>
+        <div class="form-group col-sm-auto">
+          <button class="btn btn-hero-primary" (click)="addNewRisk()">Add</button>
+        </div>
+        <div class="form-group col-sm-auto">
+          <button class="btn btn-hero-primary" (click)="submitRisk()" [disabled]="canSubmit()">Submit</button>
+        </div>
+      </div>
+
+    </div>
+
+    <nb-tabset>
+      <nb-tab tabTitle="Detail">
+        
+            <div class="resizewidth">
+          <table id="print_table" class="table table-bordered mt-3">
+            <font size="2">
+              <thead>
+                <tr>
+
+                  <th bgcolor="cyan" style="text-align:center" colspan="6">Division/Dept</th>
+
+
+                  <th bgcolor="purple" style="text-align:center" colspan="4">
+                    <font color="white"> Risk&nbsp;Description</font>
+                  </th>
+
+
+                  <th bgcolor="light blue" style="text-align:center" colspan="9">
+                    <font color="white">Inherent&nbsp;Risk</font>
+                  </th>
+
+
+                  <th bgcolor="orange" style="text-align:center" colspan="4">
+                    <font color="white">Control</font>
+                  </th>
+
+
+                  <th bgcolor="yellow" style="text-align:center" colspan="7">Residual&nbsp;Risk</th>
+
+
+                  <th bgcolor="green" style="text-align:center" colspan="6">
+                    <font color="white">Expected&nbsp;Risk</font>
+                  </th>
+
+
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="medium" style="text-align:center">Risk&nbsp;No</th>
+                  <th width="100px" style="text-align:center">Division</th>
+                  <th width="100px" style="text-align:center">Company&nbsp;KPI</th>
+                  <th width="100px" style="text-align:center">Dept&nbsp;KPI</th>
+                  <th width="100px" style="text-align:center">Department</th>
+                  <th width="100px" style="text-align:center">Business&nbsp;Process</th>
+                  <th class="wide" style="text-align:center">Loss&nbsp;Event</th>
+                  <th class="wide" style="text-align:center">Caused</th>
+                  <th width="100px" style="text-align:center">Risk&nbsp;Impact</th>
+                  <th width="100px" style="text-align:center">Risk&nbsp;Level</th>
+                  <th class="wide" style="text-align:center">Notes</th>
+                  <th width="100px" style="text-align:center">Financial&nbsp;Category</th>
+                  <th width="100px" style="text-align:center">Financial&nbsp;Amount</th>
+                  <th width="100px" style="text-align:center">Operational&nbsp;Category</th>
+                  <th width="100px" style="text-align:center">Operational&nbsp;Loss</th>
+                  <th width="100px" style="text-align:center">Qualitative&nbsp;Impact</th>
+                  <th width="100px" style="text-align:center">Impact</th>
+                  <th width="100px" style="text-align:center">Likelihood</th>
+                  <th width="100px" style="text-align:center">Overall&nbsp;Risk</th>
+                  <th class="wide" style="text-align:center">Control</th>
+                  <th width="100px" style="text-align:center">Operation</th>
+                  <th width="100px" style="text-align:center">Appropriateness</th>
+                  <th width="100px" style="text-align:center">Overall&nbsp;Control</th>
+                  <th class="wide" style="text-align:center">Notes</th>
+                  <th width="100px" style="text-align:center">Financial&nbsp;Amount</th>
+                  <th width="100px" style="text-align:center">Operational&nbsp;Loss</th>
+                  <th width="100px" style="text-align:center">Qualitative&nbsp;Impact</th>
+                  <th width="100px" style="text-align:center">Impact</th>
+                  <th width="100px" style="text-align:center">Likelihood</th>
+                  <th width="100px" style="text-align:center">Overall&nbsp;Risk</th>
+                  <th class="wide" style="text-align:center">Treatment&nbsp;Plan</th>
+                  <th width="100px" style="text-align:center">Impact</th>
+                  <th width="100px" style="text-align:center">Likelihood</th>
+                  <th width="100px" style="text-align:center">Overall</th>
+                  <th width="100px" style="text-align:center">PIC</th>
+                  <th width="100px" style="text-align:center">Schedule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tabledata">
+                  <td class="medium">{{ item.riskNo }}</td>
+                  <td style="text-align:center">{{ item.descDivision }}</td>
+                  <td style="text-align:center">{{ item.companyKpi }}</td>
+                  <td style="text-align:center">{{ item.departmentKpi }}</td>
+                  <td style="text-align:center">{{ item.descDepartment }}</td>
+                  <td >{{ item.businessProcess }}</td>
+                  <td class="wide">{{ item.lossEvent }}</td>
+                  <td>
+                    <div *ngFor="let data of insertSpace2(item.caused)">
+                      {{data}}
+                      <br>
+                    </div>
+                  </td>
+                  <td>{{ item.riskImpact }}</td>
+                  <td style="text-align:center">{{ item.riskLevel }}</td>
+                  <td>{{ item.notesIr }}</td>
+                  <td style="text-align:center">{{ item.finImpactCategory }}</td>
+                  <td style="text-align:center">{{ item.finAmountIr }}</td>
+                  <td style="text-align:center">{{ item.opImpactCategory }}</td>
+                  <td style="text-align:center">{{ item.opAmountIr }}</td>
+                  <td style="text-align:center">{{ item.qlImpactIr }}</td>
+                  <td style="text-align:center">{{ item.irImpact }}</td>
+                  <td style="text-align:center">{{ item.irLikelihood }}</td>
+                  <td style="text-align:center"> {{ item.irOverall }}</td>
+                  <td>
+                    <div *ngFor="let data of insertSpace2(item.control)">
+                      {{data}}
+                      <br>
+                    </div>
+                  </td>
+                  <td style="text-align:center">{{ item.operationCt }}</td>
+                  <td style="text-align:center">{{ item.appropriatenessCt }}</td>
+                  <td style="text-align:center">{{ item.efOverall }}</td>
+                  <td>{{ item.notesRd }}</td>
+                  <td style="text-align:center">{{ item.finAmountRd }}</td>
+                  <td style="text-align:center">{{ item.opAmountRd }}</td>
+                  <td style="text-align:center">{{ item.qlImpactRd }}</td>
+                  <td style="text-align:center">{{ item.rdImpact }}</td>
+                  <td style="text-align:center">{{ item.rdLikelihood }}</td>
+                  <td style="text-align:center">{{ item.rdOverall }}</td>
+                  <td>
+                    <div *ngFor="let data of insertSpace2(item.treatmentPlan)">
+                      {{data}}
+                      <br>
+                    </div>
+                  </td>
+                  <td style="text-align:center">{{ item.exImpact }}</td>
+                  <td style="text-align:center">{{ item.exLikelihood }}</td>
+                  <td style="text-align:center">{{ item.exOverall }}</td>
+                  <td>
+                    <div *ngFor="let data of insertSpace2(item.exPic)">
+                      {{data}}
+                      <br>
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngFor="let data of insertSpace2(item.exDueDate)">
+                      {{data}}
+                      <br>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>  
+            </font>
+          </table>
+          </div>
+        
+
+      </nb-tab>
+      <nb-tab tabTitle="Risk Map">
+
+        <div class="row">
+          <div class="form-group ">
+
+            <table class="table table-bordered">
+              <font size="1">
+                <thead>
+                  <tr>
+                    <th class="small">No</th>
+                    <th width="80">Risk&nbsp;No&nbsp;</th>
+                    <th class="medium" style="text-align:center">Loss&nbsp;Event</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of tabledata">
+                    <td  class="small">{{ item.no}}</td>
+                    <td width="80">{{ item.riskNo}}</td>
+                    <td class="medium" >{{ item.lossEvent }}</td>
+                    <td width="160px">
+                      <div class="row">
+                        <button type="button" id="heat" class="btn btn-hero-primary mr-1" (click)="showModal(item)">View</button>
+                        <button type="button" id="heat" class="btn btn-hero-primary mr-1" (click)="goToPage(item.riskNo)">Edit</button>
+                        <button type="button" id="heat" class="btn btn-hero-primary" (click)="deleteControl(item)">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </font>
+            </table>
+
+          </div>
+          <app-chart [heat]="tabledata"></app-chart>
+        </div>
+      </nb-tab>
+    </nb-tabset>
+
+
+
+    <!-- <div class="col-sm-auto row">
+      <div class="col-sm-auto">
+            <div class="form-group">
+              <button type="submit" class="btn btn-hero-primary ">Submit</button>
+            </div>
+          </div>
+      <div class="col-sm-auto">
+        <div class="form-group">
+          <button type="button" class="btn btn-hero-primary " [disabled]="buttonDisable" (click)="showModal()">Add New</button>
+        </div>
+      </div>
+    </div> -->
+  </nb-card-body>
+</nb-card>

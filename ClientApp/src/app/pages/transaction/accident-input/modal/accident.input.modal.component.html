@@ -1,0 +1,57 @@
+<nb-card>
+  <nb-card-header>Input Loss Event Database </nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Date</label><font color="red">*</font>
+          <input type="date" class="form-control" name="date" placeholder="moment()" [(ngModel)]="formData.dateAccident">
+        </div>
+      </div>
+      
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label><font color="red">*</font>
+          <textarea type="text" class="form-control" name="description" placeholder="Description" [(ngModel)]="formData.description"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-12">
+          <div class="form-group">
+            <label>Related Parties</label><font color="red">*</font>
+            <textarea type="text" class="form-control" name="relatedParties" placeholder="Related Parties" [(ngModel)]="formData.relatedParties"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+              <label>Financial Impact</label><font color="red">*</font>
+              <textarea type="text" class="form-control" name="financialImpact" placeholder="Financial Impact" [(ngModel)]="formData.financialImpact"></textarea>
+            </div>
+          </div>
+          <div class="col-sm-12">
+              <div class="form-group">
+                <label>Other Impact</label><font color="red">*</font>
+                <textarea type="text" class="form-control" name="otherImpact" placeholder="Other Impact" [(ngModel)]="formData.otherImpact"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Current Action</label><font color="red">*</font>
+                  <textarea type="text" class="form-control" name="currentAction" placeholder="Current Action" [(ngModel)]="formData.currentAction"></textarea>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Next Action</label><font color="red">*</font>
+                    <textarea type="text" class="form-control" name="nextAction" placeholder="Next Action" [(ngModel)]="formData.nextAction"></textarea>
+                  </div>
+                </div>
+                
+
+          <button type="submit" [disabled]="formData.dateAccident==''||formData.description==''||formData.relatedParties==''||(formData.financialImpact==''&&formData.otherImpact=='')||formData.currentAction==''||formData.nextAction==''"  class="btn btn-danger">Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+
+    </form>
+  </nb-card-body>
+</nb-card>

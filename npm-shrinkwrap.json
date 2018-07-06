@@ -1,0 +1,11 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "anychart": {
+      "version": "8.2.1",
+      "resolved": "https://registry.npmjs.org/anychart/-/anychart-8.2.1.tgz",
+      "integrity": "sha512-ATZyofziqCkbFNyuVNQ7Gcn6Jh7RI8mS1hf6RKheP1RKMd/fGzDDg1h4hj4oAwSxx0a76opuQggvdjjOTqCjEg=="
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<nb-card>
+  <nb-card-header>Reminder</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="submit()">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" class="form-control" name="startDate" placeholder="Start Date" [(ngModel)]="formData.startDate">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>End Date</label>
+          <input type="date" class="form-control" name="endDate" placeholder="End Date" [(ngModel)]="formData.endDate">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>Periode</label>
+          <input type="number" class="form-control" name="period" placeholder="1" [(ngModel)]="formData.period">
+        </div>
+      </div>
+
+          <button type="submit" class="btn btn-danger">Submit</button>
+          <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<!-- { COUNTER_NO: 1, YEAR_ACTIVE: "2018", DESCRIPTION: "hehehe", CONDITION: "IMP", INDICATOR_name: "IMP001", SCORE: 123 }, -->

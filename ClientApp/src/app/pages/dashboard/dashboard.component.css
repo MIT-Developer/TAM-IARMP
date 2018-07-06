@@ -1,0 +1,25 @@
+td .btn{
+    font-size:1.2em !important;
+    padding:1.5px !important;
+}
+.row {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .table td, .table th {
+    min-width: 100px;
+}
+ .table th.wide,.table td.wide {
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+.table th.small,.table td.small {
+    min-width: 30px !important;
+    max-width: 30px !important;
+}
+
+.table th.medium,.table td.medium{
+    min-width: 160px !important;
+    max-width: 160px !important;
+}
