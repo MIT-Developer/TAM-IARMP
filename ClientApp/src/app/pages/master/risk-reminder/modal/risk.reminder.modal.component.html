@@ -5,13 +5,14 @@
       <div class="col-sm-3">
         <div class="form-group">
           <label>Start Date</label>
-          <input type="date" class="form-control" name="startDate" placeholder="Start Date" [(ngModel)]="formData.startDate">
+          <input type="date" class="form-control" name="startDate" (change)="onChange()" placeholder="Start Date" [(ngModel)]="formData.startDate">
         </div>
       </div>
       <div class="col-sm-3">
         <div class="form-group">
           <label>End Date</label>
-          <input type="date" class="form-control" name="endDate" placeholder="End Date" [(ngModel)]="formData.endDate">
+          <input type="date" class="form-control" name="endDate" (change)="onChange()" placeholder="End Date" [(ngModel)]="formData.endDate">
+          <p *ngIf="!formIsValid">Tanggal akhir tidak boleh lebih kecil dari tanggal mulai</p>
         </div>
       </div>
       <div class="col-sm-3">

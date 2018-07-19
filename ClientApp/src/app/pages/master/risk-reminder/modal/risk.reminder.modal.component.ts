@@ -23,12 +23,26 @@ export class RiskReminderModalComponent {
     status: string;
   };
 
+  formIsValid: boolean;
+
   constructor(private activeModal: NgbActiveModal) {
     console.log(this.formData);
+    this.formIsValid = true;
   }
 
   submit() {
     this.activeModal.close(this.formData);
+  }
+
+  onChange(){
+    if(this.formData.endDate && this.formData.startDate){
+      if(this.formData.endDate < this.formData.startDate){
+        this.formIsValid = false;
+      }else{
+        this.formIsValid = true;
+      }
+    }
+    
   }
 
   closeModal() {
