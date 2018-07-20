@@ -12,7 +12,7 @@
         <div class="form-group">
           <label>End Date</label>
           <input type="date" class="form-control" name="endDate" (change)="onChange()" placeholder="End Date" [(ngModel)]="formData.endDate">
-          <p *ngIf="!formIsValid">Tanggal akhir tidak boleh lebih kecil dari tanggal mulai</p>
+          <p *ngIf="!formIsValidDate">Tanggal akhir tidak boleh lebih kecil dari tanggal mulai</p>
         </div>
       </div>
       <div class="col-sm-3">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-          <button type="submit" class="btn btn-danger">Submit</button>
+          <button type="submit" [disabled]="!formIsValid" class="btn btn-danger">Submit</button>
           <button type="submit" class="btn btn-hero-primary" (click)="closeModal()">Close</button>
     </form>
   </nb-card-body>

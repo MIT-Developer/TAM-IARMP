@@ -24,10 +24,12 @@ export class RiskReminderModalComponent {
   };
 
   formIsValid: boolean;
+  formIsValidDate: boolean;
 
   constructor(private activeModal: NgbActiveModal) {
     console.log(this.formData);
-    this.formIsValid = true;
+    this.formIsValid = false;
+    this.formIsValidDate = true;
   }
 
   submit() {
@@ -37,10 +39,13 @@ export class RiskReminderModalComponent {
   onChange(){
     if(this.formData.endDate && this.formData.startDate){
       if(this.formData.endDate < this.formData.startDate){
-        this.formIsValid = false;
+        this.formIsValidDate = false;
       }else{
-        this.formIsValid = true;
+        this.formIsValidDate = true;
       }
+    }
+    if(this.formIsValidDate && this.formData.period != ''){
+      this.formIsValid = true;
     }
     
   }

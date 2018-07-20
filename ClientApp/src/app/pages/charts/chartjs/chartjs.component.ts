@@ -307,6 +307,8 @@ export class ChartjsComponent {
   svg: string;
   subscription: any;
   activeModal: any;
+
+  tabActive: string;
   constructor(
     private orderPipe: OrderPipe,
     public usercred: UserCred,
@@ -439,6 +441,11 @@ export class ChartjsComponent {
         item.lossEvent = "";
       });
     }
+  }
+
+  onChangeTab(tab){
+    this.tabActive = tab.tabTitle;
+    console.log(this.tabActive);
   }
 
   showModal() {

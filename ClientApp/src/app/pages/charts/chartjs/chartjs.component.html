@@ -32,17 +32,17 @@
     <div class="row">
 
       <div class="form-group mr-1">
-        <button class="btn btn-hero-primary" (click)="print('print_tab1')">Print Chart</button>
+        <button class="btn btn-hero-primary" [disabled]="tabActive=='List Report'" (click)="print('print_tab1')">Print Chart</button>
       </div>
       <div class="form-group mr-1">
-        <button class="btn btn-hero-primary" (click)="print('print_tab2')">Print Report</button>
+        <button class="btn btn-hero-primary" [disabled]="tabActive=='Chart'" (click)="print('print_tab2')">Print Report</button>
       </div>
       <div class="form-group">
         <button class="btn btn-hero-primary" (click)="showModal()" [disabled]="canApprove()">Approval</button>
       </div>
     </div>
 
-    <nb-tabset>
+    <nb-tabset (changeTab)="onChangeTab($event)">
       <nb-tab tabTitle="Chart">
         <div class="printclass" id="print_tab1">
           <label> </label>
