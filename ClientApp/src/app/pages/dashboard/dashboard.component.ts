@@ -162,7 +162,7 @@ export class DashboardComponent {
     this.loadApprove();
   }
   loadData() {
-    this.service.getreq("Riskreports").subscribe(response => {
+    this.service.getreq("TbRRiskAssessments").subscribe(response => {
       if (response != null) {
         const data = response;
         //console.log(JSON.stringify(response));
@@ -200,7 +200,7 @@ export class DashboardComponent {
   }
 
   refreshData() {
-    this.service.getreq("Riskreports").subscribe(response => {
+    this.service.getreq("TbRRiskAssessments").subscribe(response => {
       if (response != null) {
         const data = response;
         //console.log(JSON.stringify(response));

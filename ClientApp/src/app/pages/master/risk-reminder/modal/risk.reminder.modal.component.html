@@ -18,7 +18,7 @@
       <div class="col-sm-3">
         <div class="form-group">
           <label>Periode</label>
-          <input type="number" class="form-control" name="period" placeholder="1" [(ngModel)]="formData.period">
+          <input type="number" class="form-control" name="period" (keydown)="onChange()" placeholder="1" [(ngModel)]="formData.period">
         </div>
       </div>
 

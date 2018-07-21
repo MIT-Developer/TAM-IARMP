@@ -163,8 +163,8 @@ export class RiskReminderComponent {
         data.forEach((element, ind) => {
           data[ind].yearActive = data[ind].yearActive.toString();
           data[ind].status = "0";
-          data[ind].vCounter = counter;
-          counter = counter + 1;
+          data[ind].vCounter = ind;//counter;
+          //counter = counter + 1;
           element.startDate = moment(element.startDate).format("DD/MM/YYYY");
           element.endDate = moment(element.endDate).format("DD/MM/YYYY");
         });
