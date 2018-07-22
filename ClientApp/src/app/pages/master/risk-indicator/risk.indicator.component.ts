@@ -52,7 +52,7 @@ export class RiskIndicatorComponent {
         title: "Description",
         type: "string",
         filter: false,
-        editable: this.descriptionDisable==true,
+        editable: true,
         width: "70%"
       },
       score: {
