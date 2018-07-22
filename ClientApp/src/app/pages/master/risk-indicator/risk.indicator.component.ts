@@ -361,9 +361,37 @@ export class RiskIndicatorComponent {
   }
 
   onSaveConfirm(event) {
+    console.log("newData : ", event.newData);
     if (event.newData.description!='') {
-      event.confirm.resolve(event.newData);
-      this.submit(event);
+      if(event.newData.counterNo >1 ){
+        const upperLevel = event.source.data.find(function(object, index){
+          if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+            return object;
+          }
+        });
+        if(parseInt(event.newData.score) < parseInt(upperLevel.score)){
+          event.confirm.resolve(event.newData);
+          this.submit(event);
+        }else{
+          event.confirm.reject();
+          window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
+        }
+      }else{
+        const underLevel = event.source.data.find(function(object, index){
+          if (object.counterNo == event.newData.counterNo+1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+            return object;
+          }
+        });
+        console.log("upper :",underLevel.score);
+        console.log("current :",event.newData.score);
+        if(parseInt(event.newData.score) > parseInt(underLevel.score)){
+          event.confirm.resolve(event.newData);
+          this.submit(event);
+        }else{
+          event.confirm.reject();
+          window.alert("Score '"+ event.newData.description+"' must be bigger than '"+ underLevel.description +"'");
+        }
+      }
     } else {
       event.confirm.reject();
     }
@@ -381,7 +409,7 @@ export class RiskIndicatorComponent {
             };
           })
       : null;
-    console.log(JSON.stringify(this.tabledata));
+    // console.log(JSON.stringify(this.tabledata));
     this.tabledata.forEach((element, ind) => {
       let index = ind;
       if (this.tabledata[index].status == "1") {
