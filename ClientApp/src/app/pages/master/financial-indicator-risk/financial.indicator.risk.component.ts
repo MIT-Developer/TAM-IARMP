@@ -335,9 +335,34 @@ export class FinancialIndicatorRiskComponent {
   }
 
   onSaveConfirm(event) {
-    if (event.newData.percentageValue < 9999) {
-      event.confirm.resolve(event.newData);
-      this.submit(event);
+    if (event.newData.description!='') {
+      if(event.newData.counterNo >1 ){
+        const upperLevel = event.source.data.find(function(object, index){
+          if (object.counterNo == event.newData.counterNo-1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+            return object;
+          }
+        });
+        if(parseInt(event.newData.percentageValue) < parseInt(upperLevel.percentageValue)){
+          event.confirm.resolve(event.newData);
+          this.submit(event);
+        }else{
+          event.confirm.reject();
+          window.alert("Percentage '"+ event.newData.impact+"' must be smaller than '"+ upperLevel.impact +"'");
+        }
+      }else{
+        const underLevel = event.source.data.find(function(object, index){
+          if (object.counterNo == event.newData.counterNo+1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+            return object;
+          }
+        });
+        if(parseInt(event.newData.percentageValue) > parseInt(underLevel.percentageValue)){
+          event.confirm.resolve(event.newData);
+          this.submit(event);
+        }else{
+          event.confirm.reject();
+          window.alert("Percentage '"+ event.newData.impact+"' must be bigger than '"+ underLevel.impact +"'");
+        }
+      }
     } else {
       event.confirm.reject();
     }
