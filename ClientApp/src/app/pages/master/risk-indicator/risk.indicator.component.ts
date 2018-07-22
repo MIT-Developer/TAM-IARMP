@@ -52,7 +52,7 @@ export class RiskIndicatorComponent {
         title: "Description",
         type: "string",
         filter: false,
-        editable: true,
+        editable: this.descriptionDisable==true,
         width: "70%"
       },
       score: {
@@ -363,33 +363,38 @@ export class RiskIndicatorComponent {
   onSaveConfirm(event) {
     console.log("newData : ", event.newData);
     if (event.newData.description!='') {
-      if(event.newData.counterNo >1 ){
-        const upperLevel = event.source.data.find(function(object, index){
-          if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
-            return object;
-          }
-        });
-        if(parseInt(event.newData.score) < parseInt(upperLevel.score)){
-          event.confirm.resolve(event.newData);
-          this.submit(event);
-        }else{
-          event.confirm.reject();
-          window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
-        }
+      if(event.newData.score < 0 ){
+        event.confirm.reject();
+          window.alert("Score must be positive value");
       }else{
-        const underLevel = event.source.data.find(function(object, index){
-          if (object.counterNo == event.newData.counterNo+1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
-            return object;
+        if(event.newData.counterNo >1 ){
+          const upperLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          if(parseInt(event.newData.score) < parseInt(upperLevel.score)){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
           }
-        });
-        console.log("upper :",underLevel.score);
-        console.log("current :",event.newData.score);
-        if(parseInt(event.newData.score) > parseInt(underLevel.score)){
-          event.confirm.resolve(event.newData);
-          this.submit(event);
         }else{
-          event.confirm.reject();
-          window.alert("Score '"+ event.newData.description+"' must be bigger than '"+ underLevel.description +"'");
+          const underLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo+1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          console.log("upper :",underLevel.score);
+          console.log("current :",event.newData.score);
+          if(parseInt(event.newData.score) > parseInt(underLevel.score)){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Score '"+ event.newData.description+"' must be bigger than '"+ underLevel.description +"'");
+          }
         }
       }
     } else {

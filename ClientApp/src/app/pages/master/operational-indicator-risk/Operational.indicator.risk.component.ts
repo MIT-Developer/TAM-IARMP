@@ -339,31 +339,36 @@ export class OperationalIndicatorRiskComponent {
   onSaveConfirm(event) {
     console.log(event);
     if (event.newData.description!='' && event.newData.numberValue <= 100 && this.percentageCheck) {
-      if(event.newData.counterNo >1 ){
-        const upperLevel = event.source.data.find(function(object, index){
-          if (object.counterNo == event.newData.counterNo-1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
-            return object;
-          }
-        });
-        if(parseInt(event.newData.numberValue) < parseInt(upperLevel.numberValue)){
-          event.confirm.resolve(event.newData);
-          this.submit(event);
-        }else{
-          event.confirm.reject();
-          window.alert("Percentage '"+ event.newData.descriptionrisk+"' must be smaller than '"+ upperLevel.descriptionrisk +"'");
-        }
+      if(event.newData.numberValue < 0 ){
+        event.confirm.reject();
+          window.alert("Number must be positive value");
       }else{
-        const underLevel = event.source.data.find(function(object, index){
-          if (object.counterNo == event.newData.counterNo+1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
-            return object;
+        if(event.newData.counterNo >1 ){
+          const upperLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo-1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          if(parseInt(event.newData.numberValue) < parseInt(upperLevel.numberValue)){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Percentage '"+ event.newData.descriptionrisk+"' must be smaller than '"+ upperLevel.descriptionrisk +"'");
           }
-        });
-        if(parseInt(event.newData.numberValue) > parseInt(underLevel.numberValue)){
-          event.confirm.resolve(event.newData);
-          this.submit(event);
         }else{
-          event.confirm.reject();
-          window.alert("Percentage '"+ event.newData.descriptionrisk+"' must be bigger than '"+ underLevel.descriptionrisk +"'");
+          const underLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo+1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          if(parseInt(event.newData.numberValue) > parseInt(underLevel.numberValue)){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Percentage '"+ event.newData.descriptionrisk+"' must be bigger than '"+ underLevel.descriptionrisk +"'");
+          }
         }
       }
     } else {
