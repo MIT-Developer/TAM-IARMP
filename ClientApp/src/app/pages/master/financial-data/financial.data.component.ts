@@ -226,7 +226,23 @@ export class FinancialDataComponent {
      this.data.dividend== 0 ||
      this.data.operatingProfit== 0 ||
      this.data.netIncomeProfit== 0 ||
-     this.data.operatingCashFlow== 0) {
+     this.data.operatingCashFlow== 0 ||
+     this.data.cashCashEquivalent== '' ||
+     this.data.netWorkingCapital== '' ||
+     this.data.fixedAssets== '' ||
+     this.data.otherAssets== '' ||
+     this.data.otherLiabilities== '' ||
+     this.data.minorityInterest== '' ||
+     this.data.equity== '' ||
+     this.data.revenue== '' ||
+     this.data.costOfRevenue== '' ||
+     this.data.operatingExpenses== '' ||
+     this.data.nonOperatingIncome== '' ||
+     this.data.taxExpense== '' ||
+     this.data.dividend== '' ||
+     this.data.operatingProfit== '' ||
+     this.data.netIncomeProfit== '' ||
+     this.data.operatingCashFlow== '') {
       this.toastr.error ("Data Not Complete!");
     } else {
       if (this.data.status == "1") {
