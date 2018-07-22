@@ -94,7 +94,7 @@ export class OperationalIndicatorRiskComponent {
             case "DOD":
               return "Days";
             default:
-              return "Percent";
+              return "%";
           }
         }
       }
@@ -320,7 +320,7 @@ export class OperationalIndicatorRiskComponent {
               case "DOD":
                 return "Days";
               default:
-                return "Percent";
+                return "%";
             }
           }
         }
