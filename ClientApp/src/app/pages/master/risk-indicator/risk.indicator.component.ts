@@ -367,18 +367,36 @@ export class RiskIndicatorComponent {
         event.confirm.reject();
           window.alert("Score must be positive value");
       }else{
-        if(event.newData.counterNo >1 ){
+        if(event.newData.counterNo ==4){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
               return object;
             }
           });
-          if(parseInt(event.newData.score) < parseInt(upperLevel.score)){
+          if(parseInt(event.newData.score) < parseInt(underLevel.score)){
             event.confirm.resolve(event.newData);
             this.submit(event);
           }else{
             event.confirm.reject();
-            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
+            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ underLevel.description +"'");
+          }
+        }else if(event.newData.counterNo >1 && event.newData.counterNo <4){
+          const upperLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          const underLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo+1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          if((parseInt(event.newData.score) < parseInt(upperLevel.score)) && (parseInt(nee.Data.score) > parseInt(underLevel.score))){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"' and must be bigger than '"+ underLevel.description +"'");
           }
         }else{
           const underLevel = event.source.data.find(function(object, index){
