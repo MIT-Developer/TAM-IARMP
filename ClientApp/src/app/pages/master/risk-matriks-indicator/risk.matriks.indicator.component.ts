@@ -761,9 +761,6 @@ export class RiskMatriksIndicatorComponent {
                 error => {
                   console.log(error);
                   this.toastr.error("Data Saved Failed!");
-                };
-                success =>{
-                  this.toastr.success("Data Saved!");
                 }
               });
           }else{
