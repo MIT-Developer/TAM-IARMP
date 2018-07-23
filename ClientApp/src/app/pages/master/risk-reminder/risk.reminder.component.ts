@@ -414,17 +414,23 @@ export class RiskReminderComponent {
         "DD/MM/YYYY"
       ).format();
       console.log(JSON.stringify(dataToBeUpdated));
-      this.service.putreq("TbMRiskReminders", dataToBeUpdated).subscribe(
-        response => {
-          console.log(JSON.stringify(dataToBeUpdated));
-          event.confirm.resolve();
-          this.toastr.success("Data Saved!");
-        },
-        error => {
-          event.confirm.reject(event.newData);
-          this.toastr.error("Data Delete Failed! Reason: " + error.statusText);
-        }
-      );
+      if(dataToBeUpdated.endData > dataToBeUpdated.startDate){
+        this.service.putreq("TbMRiskReminders", dataToBeUpdated).subscribe(
+          response => {
+            console.log(JSON.stringify(dataToBeUpdated));
+            event.confirm.resolve();
+            this.toastr.success("Data Saved!");
+          },
+          error => {
+            event.confirm.reject(event.newData);
+            this.toastr.error("Data Delete Failed! Reason: " + error.statusText);
+          }
+        );  
+      }else{
+        event.confirm.reject(event.newData);
+        this.toastr.error("Date invalid! : End Date must be more than Start Date");
+      }
+      
     }
     console.log(JSON.stringify(this.tabledata));
     this.tabledata.forEach((element, ind) => {
