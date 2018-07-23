@@ -15,7 +15,64 @@ export class RiskIndicatorComponent {
   buttonDisable:boolean;
   scoreDisable:boolean;
   addDisable:boolean;
+  descriptionDisabled: boolean;
   yearPeriode: any = moment().format("YYYY");
+  columns: object;
+  columnsDefault: object = {
+        description: {
+          title: "Description",
+          type: "string",
+          filter: false,
+          editable: this.addDisable==true,
+          width: "70%"
+        },
+        score: {
+          title: "Score ",
+          type: "number",
+          filter: false,
+          editable: this.scoreDisable==false,
+          width: "10%"
+        },
+        flagActive: { title: 'Status', 
+        type: 'html', width: "15%", 
+        editable: this.addDisable==true,
+        editor:
+         { type: 'list', config: 
+         { list: [{ value: 'Active', title: 'Active' }, 
+         { value: 'Inactive', title: 'Inactive' }] } } }
+      };
+  columnsWithoutScore: object = {
+        description: {
+          title: "Description",
+          type: "string",
+          filter: false,
+          editable: this.addDisable==true,
+          width: "70%"
+        },
+        flagActive: { title: 'Status', 
+        type: 'html', width: "15%", 
+        editable: this.addDisable==true,
+        editor:
+         { type: 'list', config: 
+         { list: [{ value: 'Active', title: 'Active' }, 
+         { value: 'Inactive', title: 'Inactive' }] } } }
+      };
+  columnsWithoutFlag: object = {
+        description: {
+          title: "Description",
+          type: "string",
+          filter: false,
+          editable: this.addDisable==true,
+          width: "70%"
+        },
+        score: {
+          title: "Score ",
+          type: "number",
+          filter: false,
+          editable: this.scoreDisable==false,
+          width: "10%"
+        }
+      };
   settings: any = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -47,29 +104,7 @@ export class RiskIndicatorComponent {
       display: true,
       perPage: 5
     },
-    columns: {
-      description: {
-        title: "Description",
-        type: "string",
-        filter: false,
-        editable: true,
-        width: "70%"
-      },
-      score: {
-        title: "Score ",
-        type: "number",
-        filter: false,
-        editable: this.scoreDisable==false,
-        width: "10%"
-      },
-      flagActive: { title: 'Status', 
-      type: 'html', width: "15%",
-      editable: this.scoreDisable==true, 
-      editor:
-       { type: 'list', config: 
-       { list: [{ value: 'Active', title: 'Active' }, 
-       { value: 'Inactive', title: 'Inactive' }] } } }
-    }
+    columns: this.columnsDefault
   };
   source: LocalDataSource = new LocalDataSource();
   condition: any[] = [
@@ -259,33 +294,196 @@ export class RiskIndicatorComponent {
   reload() {
     this.yearPeriode = this.myForm.value.yearPeriode;
     switch (this.myForm.value.condition) {
+      case 'APR':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: true,
+            width: "70%"
+          },
+          flagActive: { 
+            title: 'Status', 
+            type: 'html', width: "15%", 
+            editable: true,
+            editor:
+             { type: 'list', config: 
+             { list: [
+               { value: 'Active', title: 'Active' }, 
+               { value: 'Inactive', title: 'Inactive' }
+               ] 
+             } 
+           } 
+         }
+        };
+      break;
       case 'IMP':
-        this.scoreDisable =false;
-        break;
-        case 'LKL':
-        this.scoreDisable =false;
-        break;
-        case 'OVR':
-        this.scoreDisable =false;
-        break;
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: false,
+            width: "70%"
+          },
+          score: {
+            title: "Score ",
+            type: "number",
+            filter: false,
+            editable: true,
+            width: "10%"
+          }
+        };
+      break;
+      case 'LKL':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: false,
+            width: "70%"
+          },
+          score: {
+            title: "Score ",
+            type: "number",
+            filter: false,
+            editable: true,
+            width: "10%"
+          }
+        };
+      break;
+      case 'LVL':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: true,
+            width: "70%"
+          },
+          flagActive: { 
+            title: 'Status', 
+            type: 'html', width: "15%", 
+            editable: true,
+            editor:
+             { type: 'list', config: 
+             { list: [
+               { value: 'Active', title: 'Active' }, 
+               { value: 'Inactive', title: 'Inactive' }
+               ] 
+             } 
+           } 
+         }
+        };
+      break;
+      case 'OPR':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: true,
+            width: "70%"
+          },
+          flagActive: { 
+            title: 'Status', 
+            type: 'html', width: "15%", 
+            editable: true,
+            editor:
+             { type: 'list', config: 
+             { list: [
+               { value: 'Active', title: 'Active' }, 
+               { value: 'Inactive', title: 'Inactive' }
+               ] 
+             } 
+           } 
+         }
+        };
+      break;
+      case 'RTP':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: true,
+            width: "70%"
+          },
+          flagActive: { 
+            title: 'Status', 
+            type: 'html', width: "15%", 
+            editable: true,
+            editor:
+             { type: 'list', config: 
+             { list: [
+               { value: 'Active', title: 'Active' }, 
+               { value: 'Inactive', title: 'Inactive' }
+               ] 
+             } 
+           } 
+         }
+        };
+      break;
+      case 'OVR':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: false,
+            width: "70%"
+          },
+          score: {
+            title: "Score ",
+            type: "number",
+            filter: false,
+            editable: true,
+            width: "10%"
+          }
+        };
+      break;
+      case 'EFF':
+        this.addDisable =false;
+        this.descriptionDisabled = true;
+        this.columns = {
+          description: {
+            title: "Description",
+            type: "string",
+            filter: false,
+            editable: false,
+            width: "70%"
+          },
+          score: {
+            title: "Score ",
+            type: "number",
+            filter: false,
+            editable: true,
+            width: "10%"
+          }
+        };
+      break;
       default:
       this.scoreDisable =true;
-    }
-    switch (this.myForm.value.condition) {
-      case 'IMP':
-        this.addDisable =false;
-        break;
-        case 'LKL':
-        this.addDisable =false;
-        break;
-        case 'OVR':
-        this.addDisable =false;
-        break;
-        case 'EFF':
-        this.addDisable =false;
-        break;
-      default:
       this.addDisable =true;
+      this.descriptionDisabled = false;
+      this.columns = this.columnsDefault;
+      break;
     }
 
     this.settings = {
@@ -319,29 +517,7 @@ export class RiskIndicatorComponent {
         display: true,
         perPage: 5
       },
-      columns: {
-        description: {
-          title: "Description",
-          type: "string",
-          filter: false,
-          editable: true,
-          width: "70%"
-        },
-        score: {
-          title: "Score ",
-          type: "number",
-          filter: false,
-          editable: this.scoreDisable==false,
-          width: "10%"
-        },
-        flagActive: { title: 'Status', 
-        type: 'html', width: "15%", 
-        editable: this.addDisable==true,
-        editor:
-         { type: 'list', config: 
-         { list: [{ value: 'Active', title: 'Active' }, 
-         { value: 'Inactive', title: 'Inactive' }] } } }
-      }
+      columns: this.columns
     };
     this.source.setFilter(
       [
@@ -361,13 +537,19 @@ export class RiskIndicatorComponent {
   }
 
   onSaveConfirm(event) {
-    console.log("newData : ", event.newData);
+    let listCount = 0;
+    event.source.data.forEach(function(object, index){
+      if(object.condition == event.newData.condition){
+        listCount = listCount +1;
+      }
+    });
+    
     if (event.newData.description!='') {
       if(event.newData.score < 0 ){
         event.confirm.reject();
           window.alert("Score must be positive value");
       }else{
-        if(event.newData.counterNo ==5){
+        if(event.newData.counterNo == listCount){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
               return object;
@@ -380,7 +562,7 @@ export class RiskIndicatorComponent {
             event.confirm.reject();
             window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
           }
-        }else if(event.newData.counterNo >1 && event.newData.counterNo <5){
+        }else if(event.newData.counterNo >1 && event.newData.counterNo <listCount){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
               return object;
@@ -404,8 +586,6 @@ export class RiskIndicatorComponent {
               return object;
             }
           });
-          console.log("upper :",underLevel.score);
-          console.log("current :",event.newData.score);
           if(parseInt(event.newData.score) > parseInt(underLevel.score)){
             event.confirm.resolve(event.newData);
             this.submit(event);
