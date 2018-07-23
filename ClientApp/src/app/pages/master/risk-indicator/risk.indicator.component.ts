@@ -295,7 +295,7 @@ export class RiskIndicatorComponent {
     this.yearPeriode = this.myForm.value.yearPeriode;
     switch (this.myForm.value.condition) {
       case 'APR':
-        this.addDisable =false;
+        this.addDisable =true;
         this.descriptionDisabled = true;
         this.columns = {
           description: {
@@ -361,7 +361,7 @@ export class RiskIndicatorComponent {
         };
       break;
       case 'LVL':
-        this.addDisable =false;
+        this.addDisable =true;
         this.descriptionDisabled = true;
         this.columns = {
           description: {
@@ -387,7 +387,7 @@ export class RiskIndicatorComponent {
         };
       break;
       case 'OPR':
-        this.addDisable =false;
+        this.addDisable =true;
         this.descriptionDisabled = true;
         this.columns = {
           description: {
@@ -413,7 +413,7 @@ export class RiskIndicatorComponent {
         };
       break;
       case 'RTP':
-        this.addDisable =false;
+        this.addDisable =true;
         this.descriptionDisabled = true;
         this.columns = {
           description: {

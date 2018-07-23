@@ -155,13 +155,24 @@
             </nb-card>
           </ng-template>
           <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">Risk&nbsp;Impack<font color="red">*</font></label>
+            <nb-actions size="small">
+              <nb-action icon="ion-help" nbPopoverMode="hover" [nbPopover]="cardRiskImpact">?</nb-action>
+            </nb-actions>
+            <div class="col-sm-5">
+              <select class="form-control" name="risk_impact" [(ngModel)]="dataInput.riskDescription.riskImpact" (change)="selectRiskImpact()">
+                <option *ngFor="let data of getListRiskIndicator('RTP')" value="{{data.indicatorId}}">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <!--<div class="form-group row ">
             <label class="col-sm-1 col-form-label">Risk&nbsp;Impact<font color="red">*</font>
             </label>
             <div class="col-lg-1">
               <nb-actions size="small">
                 <nb-action icon="ion-help" nbPopoverMode="hover" [nbPopover]="cardRiskImpact">?</nb-action>
               </nb-actions>
-            </div>
+            </div>-->
             <!--    <div class="col-sm-5">
               <select multiple [ngClass]="dataInput.riskDescription.riskImpact[0]==null&&dataInput.activateValidation?'form-control form-control-danger':'form-control'"
                 name="risk_impact" [(ngModel)]="dataInput.riskDescription.riskImpact">
@@ -171,10 +182,10 @@
             <div class="col-sm-4">
               <textarea rows="3" type="text" class="form-control" readonly="true">{{loopRiskImpact()}}</textarea>
             </div>-->
-            <div  [ngClass]="dataInput.riskDescription.riskImpact[0]==null&&dataInput.activateValidation?'col-sm-10 form-control form-control-danger':'col-sm-10'" style="padding: 0 0 0 0; height:fit-content">
+            <!--<div  [ngClass]="dataInput.riskDescription.riskImpact[0]==null&&dataInput.activateValidation?'col-sm-10 form-control form-control-danger':'col-sm-10'" style="padding: 0 0 0 0; height:fit-content">
               <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="dataInput.riskDescription.riskImpact" (ngModelChange)="onChange()"></ss-multiselect-dropdown>
             </div>
-          </div>
+          </div>-->
           <ng-template #cardRiskLevel>
             <nb-card class="popover-card">
               <nb-card-body>
@@ -183,7 +194,7 @@
             </nb-card>
           </ng-template>
           <div class="form-group row">
-            <label class="col-sm-1 col-form-label">Risk&nbsp;Level<font color="red">*</font>
+            <label class="col-sm-2 col-form-label">Risk&nbsp;Level<font color="red">*</font>
             </label>
             <nb-actions size="small">
               <nb-action icon="ion-help" nbPopoverMode="hover" [nbPopover]="cardRiskLevel">?</nb-action>

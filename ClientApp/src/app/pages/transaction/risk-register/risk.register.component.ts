@@ -1642,7 +1642,7 @@ export class RiskRegisterComponent {
         businessProcess: this.dataInput.divisionDepartment.businessProcess,
         lossEvent: this.dataInput.riskDescription.lossEvent,
         caused: this.dataInput.riskDescription.caused,
-        riskImpact: this.loopRiskImpact(),
+        riskImpact: this.data.input.riskDescription.riskImpack,
         riskLevel: this.dataInput.riskDescription.riskLevel,
         accidentList: 0,
         notesIr: this.dataInput.inherentRisk.notes,
@@ -1730,7 +1730,7 @@ export class RiskRegisterComponent {
         businessProcess: this.dataInput.divisionDepartment.businessProcess,
         lossEvent: this.dataInput.riskDescription.lossEvent,
         caused: this.dataInput.riskDescription.caused,
-        riskImpact: this.loopRiskImpact(),
+        riskImpact: this.data.input.riskDescription.riskImpack,
         riskLevel: this.dataInput.riskDescription.riskLevel,
         accidentList: 0,
         notesIr: this.dataInput.inherentRisk.notes,
@@ -2303,6 +2303,10 @@ export class RiskRegisterComponent {
 
   onChange() {
     //console.log(this.dataInput.riskDescription.riskImpact);
+  }
+
+  selectRiskImpact(event){
+    console.log(event);
   }
 
   public filterDepartment() {
@@ -3408,3 +3412,7 @@ export class RiskRegisterComponent {
     });
   }
 }
+/*
+Note : Change by me
+1. this.loopRiskImpact() -> this.dataInput.riskDescription.riskImpack
+*/
