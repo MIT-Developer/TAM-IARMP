@@ -1642,7 +1642,7 @@ export class RiskRegisterComponent {
         businessProcess: this.dataInput.divisionDepartment.businessProcess,
         lossEvent: this.dataInput.riskDescription.lossEvent,
         caused: this.dataInput.riskDescription.caused,
-        riskImpact: this.dataInput.riskDescription.riskImpack,
+        riskImpact: this.dataInput.riskDescription.riskImpact,
         riskLevel: this.dataInput.riskDescription.riskLevel,
         accidentList: 0,
         notesIr: this.dataInput.inherentRisk.notes,
@@ -1730,7 +1730,7 @@ export class RiskRegisterComponent {
         businessProcess: this.dataInput.divisionDepartment.businessProcess,
         lossEvent: this.dataInput.riskDescription.lossEvent,
         caused: this.dataInput.riskDescription.caused,
-        riskImpact: this.dataInput.riskDescription.riskImpack,
+        riskImpact: this.dataInput.riskDescription.riskImpact,
         riskLevel: this.dataInput.riskDescription.riskLevel,
         accidentList: 0,
         notesIr: this.dataInput.inherentRisk.notes,
@@ -3414,5 +3414,5 @@ export class RiskRegisterComponent {
 }
 /*
 Note : Change by me
-1. this.loopRiskImpact() -> this.dataInput.riskDescription.riskImpack
+1. this.loopRiskImpact() -> this.dataInput.riskDescription.riskImpact
 */

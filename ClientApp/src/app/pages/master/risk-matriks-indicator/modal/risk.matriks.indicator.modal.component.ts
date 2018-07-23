@@ -82,16 +82,20 @@ export class RiskMatriksIndicatorModalComponent {
   submit() {
     this.service.getreq("TbMRiskMappings").subscribe(response => {
       if (response != null) {
+        console.log("response : ",response);
+        console.log("form : ", this.formData);
         const sameObject = response.find((element, ind) => {
           if(element.condition == this.formData.condition && element.indicatorIdA == this.formData.indicatorIdA && element.indicatorIdB == this.formData.indicatorIdB && element.resultIdC == this.formData.resultIdC){
             return element;
           }
         });
+        console.log("same Object:", sameObject);
         if(!sameObject){
           this.activeModal.close(this.formData);
         }else{
           window.alert("Risk Matriks Indicator sudah ada.");
-        }
+        }  
+        
       }
     });
   }
