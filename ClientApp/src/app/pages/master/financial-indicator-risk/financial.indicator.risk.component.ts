@@ -340,7 +340,7 @@ export class FinancialIndicatorRiskComponent {
         event.confirm.reject();
           window.alert("Percentage must be positive value");
       }else{
-        if(event.newData.counterNo >1 ){
+        if(event.newData.counterNo ==5 ){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
               return object;
@@ -352,6 +352,24 @@ export class FinancialIndicatorRiskComponent {
           }else{
             event.confirm.reject();
             window.alert("Percentage '"+ event.newData.impact+"' must be smaller than '"+ upperLevel.impact +"'");
+          }
+        }else if(event.newData.counterNo >1 && event.newData.counterNo < 5 ){
+          const upperLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo-1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          const underLevel = event.source.data.find(function(object, index){
+            if (object.counterNo == event.newData.counterNo+1 && object.category == event.newData.category && object.yearActive == event.newData.yearActive){
+              return object;
+            }
+          });
+          if((parseInt(event.newData.percentageValue) < parseInt(upperLevel.percentageValue)) && (parseInt(event.newData.percentageValue) > parseInt(underLevel.percentageValue))){
+            event.confirm.resolve(event.newData);
+            this.submit(event);
+          }else{
+            event.confirm.reject();
+            window.alert("Percentage '"+ event.newData.impact+"' must be smaller than '"+ upperLevel.impact +"' and must be bigger than '"+ underLevel.impact +"'");
           }
         }else{
           const underLevel = event.source.data.find(function(object, index){
