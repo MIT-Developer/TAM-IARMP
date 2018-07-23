@@ -367,7 +367,7 @@ export class RiskIndicatorComponent {
         event.confirm.reject();
           window.alert("Score must be positive value");
       }else{
-        if(event.newData.counterNo ==4){
+        if(event.newData.counterNo ==5){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
               return object;
@@ -380,7 +380,7 @@ export class RiskIndicatorComponent {
             event.confirm.reject();
             window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
           }
-        }else if(event.newData.counterNo >1 && event.newData.counterNo <4){
+        }else if(event.newData.counterNo >1 && event.newData.counterNo <5){
           const upperLevel = event.source.data.find(function(object, index){
             if (object.counterNo == event.newData.counterNo-1 && object.condition == event.newData.condition && object.yearActive == event.newData.yearActive){
               return object;
