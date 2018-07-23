@@ -210,6 +210,7 @@ export class FinancialDataComponent {
 
   submit() {
     //console.log(JSON.stringify(this.tabledata));
+    console.log(this.data);
 
     if (this.data.cashCashEquivalent== 0 ||
      this.data.netWorkingCapital== 0 ||
@@ -242,7 +243,23 @@ export class FinancialDataComponent {
      this.data.dividend== '' ||
      this.data.operatingProfit== '' ||
      this.data.netIncomeProfit== '' ||
-     this.data.operatingCashFlow== '') {
+     this.data.operatingCashFlow== '' ||
+     this.data.cashCashEquivalent== null ||
+     this.data.netWorkingCapital== null ||
+     this.data.fixedAssets== null ||
+     this.data.otherAssets== null ||
+     this.data.otherLiabilities== null ||
+     this.data.minorityInterest== null ||
+     this.data.equity== null ||
+     this.data.revenue== null ||
+     this.data.costOfRevenue== null ||
+     this.data.operatingExpenses== null ||
+     this.data.nonOperatingIncome== null ||
+     this.data.taxExpense== null ||
+     this.data.dividend== null ||
+     this.data.operatingProfit== null ||
+     this.data.netIncomeProfit== null ||
+     this.data.operatingCashFlow== null) {
       this.toastr.error ("Data Not Complete!");
     } else {
       if (this.data.status == "1") {
