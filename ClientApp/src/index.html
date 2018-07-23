@@ -7,12 +7,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+  .nb-theme-default .btn.btn-hero-primary{
+    background-color: #CC0400 !important;
+    background-image: none !important;
+  }
+  .nb-theme-default nb-layout .layout .layout-container nb-sidebar.fixed {
+    border-radius: 0px !important;
+  }
+  nb-layout-footer{
+    display: none !important;
+  }
+  .nb-theme-default nb-menu .menu-items > .menu-item a:hover{
+    color: #CC0400;
+  }
+  .nb-theme-default nb-menu .menu-items > .menu-item a:hover i{
+    color: #CC0400;
+  }
+  .nb-theme-default nb-menu .menu-item > .menu-items > .menu-item a.active {
+    border-color:#CC0400 !important;
+  }
+  .nb-menu:hover{
+    color: #CC0400;
+  }
+  #loading-container{
+    width:25rem;
+  }
+  #tam-sso {
+  color: #fff;
+  background-color: #CC0400;
+  border: 1px solid #7F0200;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
 
+#tam-sso:hover {
+  background-color: #BF0400;
+  cursor: pointer
+}
+
+#tam-sso img {
+  vertical-align: middle;
+  margin-right: 8px
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+#middle_box_logo {
+  width: 100%
+}
+
+  </style>
+  <style>
+      @keyframes blink {
+          0% {
+            opacity: .2;
+          }
+          20% {
+            opacity: 1;
+          }
+          100% {
+            opacity: .2;
+          }
+      }
+      .saving {
+          font-size: 24pt;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+      }
+      .saving span {
+          animation-name: blink;
+          animation-duration: 1.4s;
+          animation-iteration-count: infinite;
+          animation-fill-mode: both;
+      }
+
+      .saving span:nth-child(2) {
+          animation-delay: .2s;
+      }
+
+      .saving span:nth-child(3) {
+          animation-delay: .4s;
+      }
+      .saving span:nth-child(4) {
+          animation-delay: .6s;
+      }
+      .saving span:nth-child(5) {
+          animation-delay: .8s;
+      }
+      .saving span:nth-child(6) {
+          animation-delay: 1s;
+      }
+  </style>
 </head>
 <body>
-  <ngx-app>Loading...</ngx-app>
-
-  <style>@-webkit-keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-moz-keyframes spin{0%{-moz-transform:rotate(0)}100%{-moz-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinner{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1003;background: #000000;overflow:hidden}  .spinner div:first-child{display:block;position:relative;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 3px 3px 0 rgba(255,56,106,1);transform:translate3d(0,0,0);animation:spin 2s linear infinite}  .spinner div:first-child:after,.spinner div:first-child:before{content:'';position:absolute;border-radius:50%}  .spinner div:first-child:before{top:5px;left:5px;right:5px;bottom:5px;box-shadow:0 3px 3px 0 rgb(255, 228, 32);-webkit-animation:spin 3s linear infinite;animation:spin 3s linear infinite}  .spinner div:first-child:after{top:15px;left:15px;right:15px;bottom:15px;box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);animation:spin 1.5s linear infinite}</style>
+  <ngx-app>
+    
+  </ngx-app>
+    <div class="center spinner" id="nb-global-spinner">
+      <nb-card>
+        <nb-card-body>
+          <div style="height: 100%;">
+            <div class="middle_box_container">
+              <div id="middle_box_logo">
+                <img style="width:100%" src="https://tones.toyota.astra.co.id/css/images/logo.png" />
+              </div>
+              <div id="middle_box">
+                  <p align="center"><p class="saving"><span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;</p></p>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+ <!-- <style>@-webkit-keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-moz-keyframes spin{0%{-moz-transform:rotate(0)}100%{-moz-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinner{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1003;background: #000000;overflow:hidden}  .spinner div:first-child{display:block;position:relative;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 3px 3px 0 rgba(255,56,106,1);transform:translate3d(0,0,0);animation:spin 2s linear infinite}  .spinner div:first-child:after,.spinner div:first-child:before{content:'';position:absolute;border-radius:50%}  .spinner div:first-child:before{top:5px;left:5px;right:5px;bottom:5px;box-shadow:0 3px 3px 0 rgb(255, 228, 32);-webkit-animation:spin 3s linear infinite;animation:spin 3s linear infinite}  .spinner div:first-child:after{top:15px;left:15px;right:15px;bottom:15px;box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);animation:spin 1.5s linear infinite}</style>
   <div id="nb-global-spinner" class="spinner">
     <div class="blob blob-0"></div>
     <div class="blob blob-1"></div>
@@ -20,7 +138,7 @@
     <div class="blob blob-3"></div>
     <div class="blob blob-4"></div>
     <div class="blob blob-5"></div>
-  </div>
+  </div>-->
 
 </body>
 </html>

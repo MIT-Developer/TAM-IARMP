@@ -338,7 +338,24 @@ export class OperationalIndicatorRiskComponent {
 
   onSaveConfirm(event) {
     console.log(event);
-    if (event.newData.description!='' && event.newData.numberValue <= 100 && this.percentageCheck) {
+    switch(event.newData.category){
+      case 'MAS' :
+        const maxNumber = 100;
+      break;
+      case 'SAL' :
+        const maxNumber = 99999999999999999;
+      break;
+      case 'CAS' :
+        const maxNumber = 100;
+      break;
+      case 'CSA' :
+        const maxNumber = 100;
+      break;
+      case 'DOD' :
+        const maxNumber = 365;
+      break;
+    }
+    if (event.newData.description!='' && event.newData.numberValue <= maxNumber) {
       if(event.newData.numberValue < 0 ){
         event.confirm.reject();
           window.alert("Number must be positive value");
@@ -390,6 +407,7 @@ export class OperationalIndicatorRiskComponent {
         }
       }
     } else {
+      window.alert("Maximum number exceeded");
       event.confirm.reject();
     }
   }
