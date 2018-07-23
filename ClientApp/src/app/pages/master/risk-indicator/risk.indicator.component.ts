@@ -373,12 +373,12 @@ export class RiskIndicatorComponent {
               return object;
             }
           });
-          if(parseInt(event.newData.score) < parseInt(underLevel.score)){
+          if(parseInt(event.newData.score) < parseInt(upperLevel.score)){
             event.confirm.resolve(event.newData);
             this.submit(event);
           }else{
             event.confirm.reject();
-            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ underLevel.description +"'");
+            window.alert("Score '"+ event.newData.description+"' must be smaller than '"+ upperLevel.description +"'");
           }
         }else if(event.newData.counterNo >1 && event.newData.counterNo <4){
           const upperLevel = event.source.data.find(function(object, index){
@@ -391,7 +391,7 @@ export class RiskIndicatorComponent {
               return object;
             }
           });
-          if((parseInt(event.newData.score) < parseInt(upperLevel.score)) && (parseInt(nee.Data.score) > parseInt(underLevel.score))){
+          if((parseInt(event.newData.score) < parseInt(upperLevel.score)) && (parseInt(event.newData.score) > parseInt(underLevel.score))){
             event.confirm.resolve(event.newData);
             this.submit(event);
           }else{
