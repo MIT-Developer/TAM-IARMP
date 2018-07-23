@@ -158,12 +158,20 @@ export class RiskReminderComponent {
     this.service.getreq("TbMRiskReminders").subscribe(response => {
       if (response != null) {
         const data = response;
-        console.log(JSON.stringify(response));
+        // console.log(JSON.stringify(response));
         let counter = 1;
+        let countAPR = 0;
+        let countSum = 0;
         data.forEach((element, ind) => {
-          data[ind].yearActive = data[ind].yearActive.toString();
-          data[ind].status = "0";
-          data[ind].vCounter = ind;//counter;
+          if(element.typeReminder == 'APR'){
+            countAPR = countAPR +1;
+            element.vCounter = countAPR;//counter;
+          }else if(element.typeReminder == 'SUB'){
+            countSum = countSum + 1;
+            element.vCounter = countSum;//counter;
+          }
+          element.yearActive = element.yearActive.toString();
+          element.status = "0";
           //counter = counter + 1;
           element.startDate = moment(element.startDate).format("DD/MM/YYYY");
           element.endDate = moment(element.endDate).format("DD/MM/YYYY");
