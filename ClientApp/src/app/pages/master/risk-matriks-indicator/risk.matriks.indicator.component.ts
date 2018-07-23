@@ -137,7 +137,7 @@ export class RiskMatriksIndicatorComponent {
 
   loadData() {
     this.service.getreq("TbMRiskMappings").subscribe(response => {
-      console.log(response);
+      console.log("TbMRiskMappings",response);
       if (response != null) {
         const data = response;
         console.log(response);
@@ -145,13 +145,11 @@ export class RiskMatriksIndicatorComponent {
           data[ind].yearActive = data[ind].yearActive.toString();
           data[ind].status = "0";
           this.tabledata = data;
-          console.log(this.tabledata);
           this.source.load(this.tabledata);
         });
         this.service.getreq("TbMRiskIndicators").subscribe(response => {
           if (response != null) {
             const data = response;
-            console.log(JSON.stringify(response));
             data.forEach((element, ind) => {
               data[ind].yearActive = data[ind].yearActive.toString();
               data[ind].score == null
@@ -163,9 +161,7 @@ export class RiskMatriksIndicatorComponent {
             let year = this.myForm.value.yearPeriode;
             let conditionA = this.conditionA.data;
             let conditionB = this.conditionB.data;
-            console.log(this.myForm.value.condition);
             let conditionC = this.myForm.value.condition;
-            console.log(this.myForm.value.condition);
             this.listData(
               this.riskIndicatorData.filter(function search(item) {
                 return (
@@ -184,7 +180,6 @@ export class RiskMatriksIndicatorComponent {
               })
             ).then(item => {
               this.item = item;
-              console.log(item);
               this.settings = {
                 add: {
                   addButtonContent: '<i class="nb-plus"></i>',
@@ -218,7 +213,7 @@ export class RiskMatriksIndicatorComponent {
                 },
                 columns: {
                   indicatorIdA: {
-                    title: "Condition 1",
+                    title: "Condition A",
                     type: "text",
                     filter: false,
                     editable: true,
@@ -242,7 +237,7 @@ export class RiskMatriksIndicatorComponent {
                     }
                   },
                   indicatorIdB: {
-                    title: "Condition 2",
+                    title: "Condition B",
                     type: "text",
                     filter: false,
                     editable: true,
@@ -734,34 +729,47 @@ export class RiskMatriksIndicatorComponent {
   }
   submit(event?) {
     console.log(event);
-    event
-      ? this.service
+    if(event){
+      console.log("event : ",event);
+      const sameObject = this.tabledata.find((element, ind) => {
+        if(element.condition == event.newData.condition && element.indicatorIdA == event.newData.indicatorIdA && element.indicatorIdB == event.newData.indicatorIdB && element.resultIdC == event.newData.resultIdC){
+          return element;
+        }
+      });
+      if(!sameObject){
+        this.service
           .putreq("TbMRiskMappings", JSON.stringify(event.newData))
           .subscribe(response => {
-            console.log(JSON.stringify(event.newData));
             event.confirm.resolve(event.newData);
             error => {
               console.log(error);
-            };
-          })
-      : null;
-    console.log(JSON.stringify(this.tabledata));
-    this.tabledata.forEach((element, ind) => {
-      let index = ind;
-      if (this.tabledata[index].status == "1") {
-        this.service
-          .postreq("TbMRiskMappings", this.tabledata[index])
-          .subscribe(response => {
-            console.log(response);
-            this.tabledata[index].status = "0";
-            error => {
-              console.log(error);
+              this.toastr.error("Data Saved Failed!");
             };
           });
-      }
-    });
 
-    this.toastr.success("Data Saved!");
+
+        this.tabledata.forEach((element, ind) => {
+          if (element.status == '1') {
+            this.service
+              .postreq("TbMRiskMappings", element)
+              .subscribe(response => {
+                element.status = "0";
+                error => {
+                  console.log(error);
+                  this.toastr.error("Data Saved Failed!");
+                };
+                success =>{
+                  this.toastr.success("Data Saved!");
+                }
+              });
+          }else{
+            console.log(ind," : ",element);
+          }
+        });
+      }else{
+        this.toastr.error("Risk Matriks Indicator sudah ada.");
+      }
+    }
   }
 
   async listData(item1, item2, item3) {

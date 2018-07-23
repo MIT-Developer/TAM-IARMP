@@ -422,7 +422,7 @@ export class RiskReminderComponent {
         "DD/MM/YYYY"
       ).format();
       console.log(JSON.stringify(dataToBeUpdated));
-      if(dataToBeUpdated.endData > dataToBeUpdated.startDate){
+      if(dataToBeUpdated.endDate > dataToBeUpdated.startDate){
         this.service.putreq("TbMRiskReminders", dataToBeUpdated).subscribe(
           response => {
             console.log(JSON.stringify(dataToBeUpdated));

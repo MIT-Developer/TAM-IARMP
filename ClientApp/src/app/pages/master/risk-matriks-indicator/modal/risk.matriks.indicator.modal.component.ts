@@ -2,6 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { NgForm } from "@angular/forms";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { BackendService } from "../../../../@core/data/backend.service";
 
 @Component({
   selector: "ngx-risk-matriks-indicator-modal",
@@ -34,7 +35,7 @@ export class RiskMatriksIndicatorModalComponent {
     status: string;
   };
 
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor(private activeModal: NgbActiveModal, public service: BackendService) {}
 
   ngAfterViewInit() {
     console.log(this.formData);
@@ -79,8 +80,20 @@ export class RiskMatriksIndicatorModalComponent {
     }
   }
   submit() {
-    console.log(this.formData);
-    this.activeModal.close(this.formData);
+    this.service.getreq("TbMRiskMappings").subscribe(response => {
+      if (response != null) {
+        const sameObject = response.find((element, ind) => {
+          if(element.condition == this.formData.condition && element.indicatorIdA == this.formData.indicatorIdA && element.indicatorIdB == this.formData.indicatorIdB && element.resultIdC == this.formData.resultIdC){
+            return element;
+          }
+        });
+        if(!sameObject){
+          this.activeModal.close(this.formData);
+        }else{
+          window.alert("Risk Matriks Indicator sudah ada.");
+        }
+      }
+    });
   }
 
   closeModal() {
