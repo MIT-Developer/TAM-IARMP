@@ -746,6 +746,10 @@ export class RiskMatriksIndicatorComponent {
               this.toastr.error("Data Saved Failed!");
             };
           });
+        }else{
+          this.toastr.error("Risk Matriks Indicator sudah ada.");
+        }
+      }
 
 
         this.tabledata.forEach((element, ind) => {
@@ -753,7 +757,7 @@ export class RiskMatriksIndicatorComponent {
             this.service
               .postreq("TbMRiskMappings", element)
               .subscribe(response => {
-                element.status = "0";
+                this.tabledata[ind].status = "0";
                 error => {
                   console.log(error);
                   this.toastr.error("Data Saved Failed!");
@@ -766,10 +770,6 @@ export class RiskMatriksIndicatorComponent {
             console.log(ind," : ",element);
           }
         });
-      }else{
-        this.toastr.error("Risk Matriks Indicator sudah ada.");
-      }
-    }
   }
 
   async listData(item1, item2, item3) {

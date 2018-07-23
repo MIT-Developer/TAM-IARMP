@@ -160,7 +160,7 @@
               <nb-action icon="ion-help" nbPopoverMode="hover" [nbPopover]="cardRiskImpact">?</nb-action>
             </nb-actions>
             <div class="col-sm-5">
-              <select class="form-control" name="risk_impact" [(ngModel)]="dataInput.riskDescription.riskImpact" (change)="selectRiskImpact()">
+              <select multiple class="form-control" name="risk_impact" [(ngModel)]="dataInput.riskDescription.riskImpact" (change)="selectRiskImpact()">
                 <option *ngFor="let data of getListRiskIndicator('RTP')" value="{{data.indicatorId}}">{{data.description}}</option>
               </select>
             </div>
