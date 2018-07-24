@@ -267,7 +267,7 @@ export class RiskIndicatorComponent {
     this.activeModal.result.then(
       async response => {
         console.log(response);
-        if (response != null) {
+        if (response != null && response != false) {
           this.tabledata.push(response);
           console.log(this.tabledata);
           this.submit();

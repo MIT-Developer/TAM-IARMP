@@ -338,21 +338,22 @@ export class OperationalIndicatorRiskComponent {
 
   onSaveConfirm(event) {
     console.log(event);
+    let maxNumber = 0;
     switch(event.newData.category){
       case 'MAS' :
-        const maxNumber = 100;
+        maxNumber = 100;
       break;
       case 'SAL' :
-        const maxNumber = 99999999999999999;
+        maxNumber = 99999999999999999;
       break;
       case 'CAS' :
-        const maxNumber = 100;
+        maxNumber = 100;
       break;
       case 'CSA' :
-        const maxNumber = 100;
+        maxNumber = 100;
       break;
       case 'DOD' :
-        const maxNumber = 365;
+        maxNumber = 365;
       break;
     }
     if (event.newData.description!='' && event.newData.numberValue <= maxNumber) {

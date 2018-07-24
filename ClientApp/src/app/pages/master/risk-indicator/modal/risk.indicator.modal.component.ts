@@ -26,8 +26,11 @@ export class RiskIndicatorModalComponent {
     status: string;
   };
 
+  scoreDisable: boolean;
+
   constructor(private activeModal: NgbActiveModal) {
     console.log(this.formData);
+    console.log(this.condition);
   }
 
   getTitle(cond) {
