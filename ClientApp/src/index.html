@@ -8,16 +8,77 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
+  body{
+    font-family: Helvetica Verdana sans-serif !important;
+    background-color:##a4abb3 !important;
+  }
+  nav{
+    padding: 0px 15px 0px 15px !important;
+    height: 3.5rem !important; 
+    background: #232530 !important;
+    color: #ffffff !important;
+  }
+  nav.ng2-smart-pagination-nav{
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .nb-theme-default nb-sidebar.compacted nb-menu .menu-item a.active::before{
+    background-color: #CC0400 !important;
+  }
+  .nb-theme-default nb-tabset ul li a::before{
+    background-color: #CC0400 !important;
+  }
+  .layout-container{
+    padding-top: 3.5rem !important;
+  }
+  .content{
+    margin-left:0px !important;
+  }
+  .header-container{
+    padding:0px !important;
+    justify-content: space-between;
+  }
+  .logo-container{
+    background-color: #CC0400;
+    color: #ffffff !important;
+  }
+   .navigation{
+    color:#ffffff !important;
+  }
+  .logo-header img{
+    height: 25px;
+  }
+  .btn {
+    text-transform: capitalize !important;
+  }
+
+  nb-card{
+    border-radius: 0px !important;
+  }
+
+  .main-content{
+    padding:0px !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
   .nb-theme-default .btn.btn-hero-primary{
     background-color: #CC0400 !important;
     background-image: none !important;
     border-radius: 0px !important;
   }
+  
   .nb-theme-default nb-layout .layout .layout-container nb-sidebar.fixed {
     border-radius: 0px !important;
+    top:0px!important;
+    height: 100vh;
+    position: inherit !important;
   }
   nb-layout-footer{
     display: none !important;
+  }
+  .nb-theme-default nb-sidebar .main-container{
+    height:100% !important;
   }
   .nb-theme-default nb-card{
     border-radius: 0px !important;
@@ -33,6 +94,16 @@
   }
   .nb-menu:hover{
     color: #CC0400;
+  }
+  .nb-theme-default nb-menu .menu-item > .menu-items > .menu-item a:hover{
+    border-color: #CC0400 !important;
+    margin-right: -20px;
+    background-color: #cc0400 !important;
+    border-radius: 0px;
+    right: 0px;
+    padding-left: 35px;
+    margin-left: -20px;
+    color: #ffffff !important;
   }
   #loading-container{
     width:25rem;
@@ -64,6 +135,16 @@
   transform: translate(-50%, -50%);
   width: 50%;
 }
+
+.nb-theme-default nb-menu .menu-item > .menu-items > .menu-item a.active {
+    border-color: #CC0400 !important;
+    margin-right: -20px;
+    background-color: #cc0400 !important;
+    border-radius: 0px;
+    right: 0px;
+    padding-left: 35px;
+    margin-left: -20px;
+    color: #ffffff !important;
 
 #middle_box_logo {
   width: 100%
@@ -114,13 +195,16 @@
       .saving span:nth-child(6) {
           animation-delay: 1s;
       }
+
   </style>
 </head>
 <body>
   <ngx-app>
     
   </ngx-app>
-    <div class="center spinner" id="nb-global-spinner">
+    <div class="spinner" id="nb-global-spinner">
+
+      <div class="center" style="padding:1.25rem;background-color:#ffffff;">
       <nb-card>
         <nb-card-body>
           <div style="height: 100%;">
@@ -129,11 +213,16 @@
                 <img style="width:100%" src="https://tones.toyota.astra.co.id/css/images/logo.png" />
               </div>
               <div id="middle_box">
+
+                <div class="body">
                   <p align="center"><p class="saving"><span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;</p></p>
+                </div>
               </div>
             </div>
           </div>
+
         </nb-card-body>
+
       </nb-card>
     </div>
  <!-- <style>@-webkit-keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-moz-keyframes spin{0%{-moz-transform:rotate(0)}100%{-moz-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinner{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1003;background: #000000;overflow:hidden}  .spinner div:first-child{display:block;position:relative;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 3px 3px 0 rgba(255,56,106,1);transform:translate3d(0,0,0);animation:spin 2s linear infinite}  .spinner div:first-child:after,.spinner div:first-child:before{content:'';position:absolute;border-radius:50%}  .spinner div:first-child:before{top:5px;left:5px;right:5px;bottom:5px;box-shadow:0 3px 3px 0 rgb(255, 228, 32);-webkit-animation:spin 3s linear infinite;animation:spin 3s linear infinite}  .spinner div:first-child:after{top:15px;left:15px;right:15px;bottom:15px;box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);animation:spin 1.5s linear infinite}</style>

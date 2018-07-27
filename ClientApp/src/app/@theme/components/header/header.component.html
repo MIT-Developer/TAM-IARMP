@@ -1,9 +1,13 @@
 <div class="header-container"
      [class.left]="position === 'normal'"
      [class.right]="position === 'inverse'">
-  <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">Risk & Control Self Assessment</div>
+      <div class="logo-containter">
+          <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+          <div class="logo" (click)="goToHome()">Risk & Control Self Assessment</div>
+      </div>
+  
+  <div class="logo-header">
+    <img src="/assets/logo.png" />
   </div>
  <!-- <ngx-theme-switcher></ngx-theme-switcher>-->
 </div>
