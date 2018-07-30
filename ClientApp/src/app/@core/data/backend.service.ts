@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers, RequestOptions } from "@angular/http";
-// import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class BackendService {
   // baseurlxpay:string='http://202.158.20.141:5001/xpay-service/api/'

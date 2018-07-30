@@ -20,8 +20,11 @@ import { Location } from "@angular/common";
   templateUrl: "./risk.register.component.html",
   styleUrls: ["./risk.register.component.scss"]
 })
+
 export class RiskRegisterComponent {
+
   @ViewChild("myForm") private myForm: NgForm;
+   
   ctrType = [
     { value: "Preventive", title: "Preventive" },
     {
@@ -452,7 +455,7 @@ export class RiskRegisterComponent {
     private toastr: ToastrService,
     public service: BackendService,
     public router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.route.url.subscribe(url => {
       //console.log("activatedroute");
@@ -462,6 +465,7 @@ export class RiskRegisterComponent {
     this.accidentSrc.load(this.dataInput.riskDescription.accidentObj);
     this.controlSrc.load(this.dataInput.currentAction.controls);
     this.treatmentSrc.load(this.dataInput.expectedRisk.treatmentPlanArr);
+
   }
 
   getListRiskIndicator(value) {

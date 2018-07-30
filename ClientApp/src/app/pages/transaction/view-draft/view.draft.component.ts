@@ -104,6 +104,7 @@ export class ViewDraftComponent {
   loadData() {
     this.service.getreq("Draftrisks").subscribe(response => {
       if (response != null) {
+        console.log("response Draftrisk : ",response);
         const data = response;
         //console.log(data);
         data.forEach(item => {
