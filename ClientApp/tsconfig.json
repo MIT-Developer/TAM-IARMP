@@ -16,5 +16,9 @@
       "dom"
     ],
   
-  }
+  },
+  "include": [
+    "./**/*.ts",
+    "node_modules/angular-select2-component/index.ts"
+  ]
 }

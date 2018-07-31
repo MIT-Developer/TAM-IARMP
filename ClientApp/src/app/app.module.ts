@@ -16,15 +16,18 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ThemeModule } from "./@theme/theme.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthComponent } from "./auth/auth.component";
+import {Select2Component} from 'angular-select2-component';
+import { Select2Module } from "ng2-select2";
 import * as $ from 'jquery';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent, AuthComponent, Select2Component],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpModule,
+    Select2Module,
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgbModule.forRoot(),
