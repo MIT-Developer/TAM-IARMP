@@ -173,8 +173,8 @@ export class RiskReminderComponent {
           element.yearActive = element.yearActive.toString();
           element.status = "0";
           //counter = counter + 1;
-          element.startDate = moment(element.startDate).format("DD/MM/YYYY");
-          element.endDate = moment(element.endDate).format("DD/MM/YYYY");
+          element.startDate = moment(element.startDate).format("MM/DD/YYYY");
+          element.endDate = moment(element.endDate).format("MM/DD/YYYY");
         });
         this.tabledata = data;
         this.source.load(this.tabledata);
@@ -269,9 +269,10 @@ export class RiskReminderComponent {
     this.activeModal.result.then(async response => {
       if (response != false) {
         let data = response;
-        data.startDate = moment(data.startDate).format("DD/MM/YYYY");
-        data.endDate = moment(data.endData).format("DD/MM/YYYY");
-        this.tabledata.push(response);
+        console.log("Modal : ",response);
+        data.startDate = moment(data.startDate).format("MM/DD/YYYY");
+        data.endDate = moment(data.endData).format("MM/DD/YYYY");
+        this.tabledata.push(data);
         console.log(this.tabledata);
         this.submit();
         this.reload();

@@ -23,6 +23,9 @@ import { Location } from "@angular/common";
 
 export class RiskRegisterComponent {
 
+  risk_period : any = moment().format('YYYY');
+  register_no : string = 'ASM/ASBD-01';
+
   @ViewChild("myForm") private myForm: NgForm;
    
   ctrType = [

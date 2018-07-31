@@ -2,23 +2,186 @@
   <nb-card-header>Risk Register</nb-card-header>
   <nb-card-body>
     <div class="form-group row">
-      <label class="col-sm-1 col-form-label ">Year</label>
-      <div class="col-sm-2">
-        <input style="background-color:gainsboro;" type="text" class="form-control" [(ngModel)]="yearPeriode" disabled="true">
+      <div>
+        Period :&nbsp;<strong>{{risk_period}}</strong>
       </div>
-      <label class="col-sm-1 col-form-label">Risk No</label>
-      <div class="col-sm-3">
-        <input style="background-color:gainsboro;" type="text" class="form-control" disabled="true" [(ngModel)]="dataInput.riskNo">
+    </div>
+    <div class="form-group row">
+      <div>
+        Register No.&nbsp;<strong>{{register_no}}</strong>
       </div>
-      <div class="row mt-2 ml-1">
-        <div class="col-sm-auto">
-          <button type=" button " class="btn btn-hero-primary " (click)="saveValidation()">Save</button>
-        </div>
-        <div class="col-sm-auto">
-          <button type=" button " class="btn btn-hero-primary" [disabled]="dataInput.draftDisabled" (click)="saveAsDraft()">Save As Draft</button>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Division/Department</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Division</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Department</label>
+            <div class="col-sm-10">
+             <select class="form-control" name="department" [(ngModel)]="dataInput.divisionDepartment.department.kodeDepartment" (change)="changeDept()">
+                <option *ngFor="let data of departmentFilter" [ngValue]="data.kodeDepartment">{{data.department}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Company KPI</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Department Objective / KPI</label>
+            <div class="col-sm-10">
+             <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Activity / Business Process</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">Risk Description</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Lost Event</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Cause</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Risk Impact</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Department Objective / KPI</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Activity / Business Process</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Inherent Risk</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Notes</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Financial Impact</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Operasional Impact</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Loss</label>
+            <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Qualitative Impact</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Impact</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Overall Impact</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button type="submit" class="btn btn-danger">Save to Draft</button>
+  </nb-card-footer>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
 
     <div class="col-sm-auto">
       <nb-tabset>
