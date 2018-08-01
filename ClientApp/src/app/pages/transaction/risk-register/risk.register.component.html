@@ -11,28 +11,235 @@
         Register No.&nbsp;<strong>{{register_no}}</strong>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12 panel1">
       <div class="panel panel-primary">
         <div class="panel-heading">Division/Department</div>
         <div class="panel-body">
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Division</label>
-            <div class="col-sm-10">
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.division" (change)="changeDivision()">
+                <option ngValue="" disabled> -- Select Division -- </option>
+                <option *ngFor="let division of selectors.divisions" [ngValue]="division.charId">{{division.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Department</label>
+            <div class="col-sm-5">
+             <select class="form-control" name="department" [(ngModel)]="state.department" (change)="changeDepartment()">
+                <option ngValue="" disabled> -- Select Department -- </option>
+                <option *ngFor="let department of selectors.department" [ngValue]="department.kodeDepartment">{{department.department}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Company KPI</label>
+            <div class="col-sm-5">
+              <select class="form-control select-multiple" name="company-kpi[]" multiple="multiple" [(ngModel)]="state.companyKpi" (change)="changeCompanyKpi()">
+                <option ngValue="" disabled> -- Select Company KPI -- </option>
+                <option *ngFor="let companyKpi of selectors.companyKpi" [ngValue]="companyKpi.charId">{{companyKpi.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Department Objective / KPI</label>
+            <div class="col-sm-5">
+             <textarea rows="4" class="form-control" placeholder="Enter Department Objective / KPI" [(ngModel)]="state.departmentObjectiveKpi"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Activity / Business Process</label>
+            <div class="col-sm-5">
+              <textarea rows="4" class="form-control" placeholder="Enter Activity / Business Process" [(ngModel)]="state.activityBusinessProcess"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 panel2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Risk Description</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Loss Event</label>
+            <div class="col-sm-5">
+              <textarea rows="4" class="form-control" placeholder="Enter Loss Event" [(ngModel)]="state.lossEvent"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Cause</label>
+            <div class="col-sm-5">
+             <textarea rows="4" class="form-control" placeholder="Enter Cause" [(ngModel)]="state.cause"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Risk Impact</label>
+            <div class="col-sm-5">
+              <select class="form-control select-multiple" name="company-kpi[]" multiple="multiple" [(ngModel)]="state.companyKpi" (change)="changeRiskImpact()">
+                <option ngValue="" disabled> -- Select Risk Impack -- </option>
+                <option *ngFor="let riskImpact of selectors.riskImpact" [ngValue]="riskImpact.indicatorId">{{riskImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Risk Level</label>
+            <div class="col-sm-5">
+             <select class="form-control" name="division" [(ngModel)]="state.riskLevel" (change)="changeRiskLevel()">
+                <option ngValue="" disabled> -- Select Risk Level -- </option>
+                <option *ngFor="let riskLevel of selectors.riskLevel" [ngValue]="riskLevel.indicatorId">{{riskLevel.description}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-12 panel3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Inherent Risk</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Notes</label>
+            <div class="col-sm-5">
+              <textarea rows="4" class="form-control" placeholder="Enter Notes" [(ngModel)]="state.notes"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Financial Catagory</label>
+            <div class="col-sm-5">
+             <select class="form-control" name="division" [(ngModel)]="state.financialImpact" (change)="changeFinancialImpact()">
+                <option ngValue="" disabled> -- Select Financial Category -- </option>
+                <option *ngFor="let financialImpact of selectors.financialImpact" [ngValue]="financialImpact.charId">{{financialImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-5">
+              <input type="number" class="form-control" name="amount" [(ngModel)]="state.amount" placeholder="Enter Amount"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Operational Impact</label>
+            <div class="col-sm-5">
+             <input type="text" class="form-control" name="operationalImpact" [(ngModel)]="state.operationalImpact" placeholder="Enter Operational Impact"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Loss</label>
+            <div class="col-sm-5">
+               <input type="number" class="form-control" name="loss" [(ngModel)]="state.loss" placeholder="Enter Loss"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Qualitative Impact</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.qualitativeImpact" (change)="changeQualitativeImpact()">
+                <option ngValue="" disabled> -- Select Qualitative Impact -- </option>
+                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Impact</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.qualitativeImpact" (change)="changeQualitativeImpact()">
+                <option ngValue="" disabled> -- Select Impact -- </option>
+                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Likelyhood</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.qualitativeImpact" (change)="changeQualitativeImpact()">
+                <option ngValue="" disabled> -- Select Likelyhood -- </option>
+                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Overall Inherent Risk</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.qualitativeImpact" (change)="changeQualitativeImpact()">
+                <option ngValue="" disabled> -- Select Overall Inherent Risk -- </option>
+                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 panel4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Current Action/Controls</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Current Action/Controls</label>
+            <div class="col-sm-5">
               <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
                 <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Department</label>
-            <div class="col-sm-10">
+            <label for="division" class="col-sm-2 col-form-label">List Control</label>
+            <div class="col-sm-5">
              <select class="form-control" name="department" [(ngModel)]="dataInput.divisionDepartment.department.kodeDepartment" (change)="changeDept()">
                 <option *ngFor="let data of departmentFilter" [ngValue]="data.kodeDepartment">{{data.department}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Company KPI</label>
+            <label for="division" class="col-sm-2 col-form-label">Operation</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Appropriateness</label>
+            <div class="col-sm-5">
+             <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Overall Control</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 panel5">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Residual Risk</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Financial Category</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-5">
+             <select class="form-control" name="department" [(ngModel)]="dataInput.divisionDepartment.department.kodeDepartment" (change)="changeDept()">
+                <option *ngFor="let data of departmentFilter" [ngValue]="data.kodeDepartment">{{data.department}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Operational Category</label>
             <div class="col-sm-10">
               <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
                 <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
@@ -40,7 +247,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Department Objective / KPI</label>
+            <label for="division" class="col-sm-2 col-form-label">Loss</label>
             <div class="col-sm-10">
              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
                 <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
@@ -48,7 +255,31 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Activity / Business Process</label>
+            <label for="division" class="col-sm-2 col-form-label">Qualitative Impact</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Overall Impact</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Overall Residual Risk</label>
             <div class="col-sm-10">
               <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
                 <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
@@ -58,122 +289,37 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="panel panel-info">
-        <div class="panel-heading">Risk Description</div>
+    <div class="col-md-12 panel6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Expected Risk</div>
         <div class="panel-body">
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Lost Event</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Cause</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Risk Impact</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Department Objective / KPI</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Activity / Business Process</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-warning">
-        <div class="panel-heading">Inherent Risk</div>
-        <div class="panel-body">
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Notes</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Financial Impact</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Amount</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Operasional Impact</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Loss</label>
-            <div class="col-sm-10">
-              <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Qualitative Impact</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Impact</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+             <select class="form-control" name="department" [(ngModel)]="dataInput.divisionDepartment.department.kodeDepartment" (change)="changeDept()">
+                <option *ngFor="let data of departmentFilter" [ngValue]="data.kodeDepartment">{{data.department}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Overall Impact</label>
+            <label for="division" class="col-sm-2 col-form-label">Overall Expected Risk</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <select class="form-control" name="division" [(ngModel)]="dataInput.divisionDepartment.division.charId" (change)="filterDepartment()">
+                <option *ngFor="let data of divisionData" [ngValue]="data.charId">{{data.description}}</option>
+              </select>
             </div>
+          </div>
           </div>
         </div>
       </div>
-    </div>
   </nb-card-body>
   <nb-card-footer>
     <button type="submit" class="btn btn-danger">Save to Draft</button>
