@@ -56,6 +56,8 @@
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
     "dom-to-image": "^2.6.0",
+    "highcharts": "^6.1.1",
+    "highcharts-more": "^0.1.7",
     "html2canvas": "^1.0.0-alpha.12",
     "intl": "1.2.5",
     "ionicons": "2.0.1",

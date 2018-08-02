@@ -17,45 +17,78 @@ nb-action {
   background: green;
 }
 
-.panel1>.panel-primary{
-	border-color: #00a8ff;
+.nav-tabs {
+	border:0px;
 }
-.panel1>.panel-primary>.panel-heading{
-	border-color: #00a8ff;
+
+.nav-tabs .nav-link.panel1, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #00a8ff;
 	background-color: #00a8ff;
 }
-.panel2>.panel-primary{
-	border-color: #273c75;
+
+.panel1{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #00a8ff;
 }
-.panel2>.panel-primary>.panel-heading{
-	border-color: #273c75;
-	background-color:#273c75;
+
+.nav-tabs .nav-link.panel2, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #273c75;
+	background-color: #273c75;
 }
-.panel3>.panel-primary{
-	border-color: #e1b12c;
+
+.panel2{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #273c75;
 }
-.panel3>.panel-primary>.panel-heading{
-	border-color: #e1b12c;
-	background-color:#e1b12c;
+
+.nav-tabs .nav-link.panel3, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #e1b12c;
+	background-color: #e1b12c;
 }
-.panel4>.panel-primary{
-	border-color: #4cd137;
+
+.panel3{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #e1b12c;
 }
-.panel4>.panel-primary>.panel-heading{
-	border-color: #4cd137;
-	background-color:#4cd137;
+
+.nav-tabs .nav-link.panel4, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #4cd137;
+	background-color: #4cd137;
 }
-.panel5>.panel-primary{
-	border-color: #e84118;
+
+.panel4{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #4cd137;
 }
-.panel5>.panel-primary>.panel-heading{
-	border-color: #e84118;
-	background-color:#e84118;
+
+.nav-tabs .nav-link.panel5, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #e84118;
+	background-color: #e84118;
 }
-.panel6>.panel-primary{
-	border-color: #0097e6;
+
+.panel5{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #e84118;
 }
-.panel6>.panel-primary>.panel-heading{
-	border-color: #0097e6;
-	background-color:#0097e6;
+
+.nav-tabs .nav-link.panel6, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    border-color: #0097e6;
+	background-color: #0097e6;
+}
+
+.panel6{
+	padding-top: 15px;
+	margin:.5px;
+	border: 1px solid #0097e6;
 }
