@@ -35,28 +35,50 @@ export class RiskRegisterComponent {
     companyKpi: [],
     riskImpact: [],
     riskLevel: [],
-    financialImpact: [{
-      charId: "NEP",
-      description: "Net Profit"
-    },
-    {
-      charId: "REV",
-      description: "Revenue"
-    },
-    {
-      charId: "COF",
-      description: "Cost of revenue"
-    },
-    {
-      charId: "OEX",
-      description: "Operating expenses"
-    },
-    {
-      charId: "CHG",
-      description: "Non operating income/charges"
-    }],
+    financialImpact: [
+      {
+        charId: "NEP",
+        description: "Net Profit"
+      },
+      {
+        charId: "REV",
+        description: "Revenue"
+      },
+      {
+        charId: "COF",
+        description: "Cost of revenue"
+      },
+      {
+        charId: "OEX",
+        description: "Operating expenses"
+      },
+      {
+        charId: "CHG",
+        description: "Non operating income/charges"
+      }
+    ],
+    operationalImpact:[
+      {
+         charId: "1",
+         description: "Days of operation disruption"
+       },{
+         charId: "2",
+         description: "CSI(After Sales)"
+       },{
+         charId: "3",
+         description: "CS Sales"
+       },{
+         charId: "4",
+         description: "Sales"
+       },{
+         charId: "5",
+         description: "M/S"
+       }
+    ],
     qualitativeImpact: [],
-    operation : []
+    operation : [],
+    impact: [],
+    likelihood: []
   }
 
   state : any = {
@@ -123,26 +145,8 @@ export class RiskRegisterComponent {
     division: [],
     department: [],
     riskIndicators: [],
-    financialImpact: [{
-      charId: "NEP",
-      description: "Net Profit"
-    },
-    {
-      charId: "REV",
-      description: "Revenue"
-    },
-    {
-      charId: "COF",
-      description: "Cost of revenue"
-    },
-    {
-      charId: "OEX",
-      description: "Operating expenses"
-    },
-    {
-      charId: "CHG",
-      description: "Non operating income/charges"
-    }]
+    financialImpact: [],
+    libraries: []
   }
    
   constructor(
@@ -171,6 +175,8 @@ export class RiskRegisterComponent {
       this.selectors.riskImpact = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'RTP')});
       this.selectors.riskLevel = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'LVL')});
       this.selectors.operation = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'OPR')});
+      this.selectors.impact = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP')});
+      this.selectors.likelihood = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'LKL')});
     });
     //get Department
     this.service.getreq("tbmlibraries").subscribe(response => {
@@ -192,27 +198,77 @@ export class RiskRegisterComponent {
     });
     //getQualitative Impact
     this.service.getreq("TbMQualitativeImpacts").subscribe(response => {
-      // console.log(response);
+      console.log(response);
     });
+    //getLibrary
+    this.service.getreq("TbMLibraries").subscribe(response => {
+      console.log(response);
+      this.data.libraries = response;
+      
+    });
+    console.log(this.selectors);
+  }
+
+  getBiggestRiskImpact(list){
+    console.log(list);
+    let biggest = '';
+    list.forEach((indicator, index)=>{
+     if(index == 0){
+       biggest = indicator;
+     }
+     if(index >= 1){
+       const b = parseInt(list[index-1].substring(3,6));
+       const c = parseInt(indicator.substring(3,6));
+       console.log(b+" vs "+c);
+       if(b > c){
+         bigest = indicator;
+       }  
+     }
+    });
+    return biggest;
+  }
+
+  changeFinancialImpact(){
+    console.log("Financial Impact Change to", this.state.inherentRisk.financialImpact);
+  }  
+
+  changeInherentQualitativeImpact(){
+    let biggest = this.getBiggestRiskImpact([this.state.inherentRisk.qualitativeImpact]);
+    const impact = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP' && object.indicatorId == biggest)});
+    this.state.inherentRisk.impact = impact;
+  }
+
+  changeInherentLikelihood(){
+    console.log(this.state.inherentRisk.likelihood);
+      // let biggest = this.getBiggestRiskImpact([this.state.inherentRisk.likelihood, this.state.inherentRisk.impact.indicatorId]);
+      // console.log(biggest, this.state.inherentRisk.likelihood);
+      // const impact = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP' && object.indicatorId == biggest)});
+      // this.state.inherentRisk.overall = impact;
   }
 
   changeDivision(){
     this.selectors.department = this.data.department.filter(object=> {return (object.kodeDivisi == this.state.division.division)});
   }
+
   changeDepartment(){
     console.log("department Change to", this.state.department);
   }
+
   changeCompanyKpi(){
     console.log("CompanyKPI Change to", this.state.companyKpi);
   }
+
   changeRiskImpact(){
     console.log("RiskImpact Change to", this.state.riskImpact);
   }
+
   changeRiskLevel(){
     console.log("RiskLevel Change to", this.state.riskLevel);
   }
-  changeFinancialImpact(){
-    console.log("FinancialImpact Change to", this.state.financialImpact);
+
+  saveRiskRegister(){
+    console.log(this.state);
   }
+
 }
   
