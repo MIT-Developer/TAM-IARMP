@@ -118,10 +118,10 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Financial Catagory</label>
+            <label for="division" class="col-sm-2 col-form-label">Financial Impact</label>
             <div class="col-sm-5">
              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.financialImpact" (change)="changeFinancialImpact()">
-                <option ngValue="" disabled> -- Select Financial Category -- </option>
+                <option ngValue="" disabled> -- Select Financial Impact -- </option>
                 <option *ngFor="let financialImpact of selectors.financialImpact" [ngValue]="financialImpact.charId">{{financialImpact.description}}</option>
               </select>
             </div>
@@ -135,7 +135,10 @@
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Operational Impact</label>
             <div class="col-sm-5">
-             <input type="text" class="form-control" name="operationalImpact" [(ngModel)]="state.inherentRisk.operationalImpact" placeholder="Enter Operational Impact"/>
+             <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.operationalImpact" (change)="changeoperationalImpact()">
+                <option ngValue="" disabled> -- Select Operational Impact -- </option>
+                <option *ngFor="let operationalImpact of selectors.operationalImpact" [ngValue]="operationalImpact.charId">{{operationalImpact.description}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -147,37 +150,31 @@
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Qualitative Impact</label>
             <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.qualitativeImpact" (change)="changeQualitativeImpact()">
-                <option ngValue="" disabled> -- Select Qualitative Impact -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              <select class="form-control" name="qualitative" [(ngModel)]="state.inherentRisk.qualitativeImpact" (change)="changeInherentQualitativeImpact()">
+                <option ngValue="" disabled> -- Select Impact -- </option>
+                <option *ngFor="let impact of selectors.impact" [ngValue]="impact.indicatorId">{{impact.description}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Impact</label>
             <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.qualitativeImpact" (change)="changeQualitativeImpact()">
-                <option ngValue="" disabled> -- Select Impact -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              <h3><strong>{{ state.inherentRisk.impact.description }}</strong></h3>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.likelihood" (change)="changeInherentLikelihood()">
+                <option ngValue="" disabled> -- Select Likelihood -- </option>
+                <option *ngFor="let likelihood of selectors.likelihood" [ngValue]="likelihood.charId">{{likelihood.description}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Likelyhood</label>
+            <label for="division" class="col-sm-2 col-form-label">Overall</label>
             <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.qualitativeImpact" (change)="changeQualitativeImpact()">
-                <option ngValue="" disabled> -- Select Likelyhood -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Overall Inherent Risk</label>
-            <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.inherentRisk.qualitativeImpact" (change)="changeQualitativeImpact()">
-                <option ngValue="" disabled> -- Select Overall Inherent Risk -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
-              </select>
+              <h3><strong>{{ state.inherentRisk.overall }}</strong></h3>
             </div>
           </div>
         </div>
@@ -240,21 +237,24 @@
       <div class="tab-pane fade" id="residual" role="tabpanel" aria-labelledby="residual-tab">
         <div class="panel5">
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Financial Category</label>
+            <label for="division" class="col-sm-2 col-form-label">Financial Impact</label>
             <div class="col-sm-5">
-              <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+              <input type="number" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.residualRisk.financialImpact">
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Amount</label>
+            <label for="division" class="col-sm-2 col-form-label">Operational Impact</label>
             <div class="col-sm-5">
-             <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+             <input type="number" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.residualRisk.operationalImpact">
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Operational Category</label>
-            <div class="col-sm-10">
-              <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+            <label for="division" class="col-sm-2 col-form-label">Strategic Impact</label>
+              <div class="col-sm-10">
+               <select class="form-control" name="division" [(ngModel)]="state.residualRisk.strategic" (change)="changeLikelihood()">
+                <option ngValue="" disabled> -- Select Impact -- </option>
+                <option *ngFor="let impact of selectors.impact" [ngValue]="impact.charId">{{impact.description}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -270,21 +270,24 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Overall Impact</label>
-            <div class="col-sm-10">
-              <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+            <label for="division" class="col-sm-2 col-form-label">Impact</label>
+            <div class="col-sm-5">
+              <span>{{ state.residualRisk.impact }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
-            <div class="col-sm-10">
-              <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+            <div class="col-sm-5">
+              <select class="form-control" name="division" [(ngModel)]="state.residualRisk.likelihood" (change)="changeLikelihood()">
+                <option ngValue="" disabled> -- Select Likelihood -- </option>
+                <option *ngFor="let likelihood of selectors.likelihood" [ngValue]="likelihood.charId">{{likelihood.description}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Overall Residual Risk</label>
-            <div class="col-sm-10">
-              <textarea rows="4" class="form-control" placeholder="Enter Current Action/Controls" [(ngModel)]="state.currentAction.currentAction"></textarea>
+            <label for="division" class="col-sm-2 col-form-label">Overall</label>
+            <div class="col-sm-5">
+              <span>{{ state.residualRisk.overall }}</span>
             </div>
           </div>
         </div>
@@ -300,23 +303,23 @@
           <div class="form-group row">
             <label for="division" class="col-sm-2 col-form-label">Impact</label>
             <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.expectedRisk.impact" (change)="changeQualitativeImpact()">
+              <select class="form-control" name="division" [(ngModel)]="state.expectedRisk.impact" (change)="changeImpact()">
                 <option ngValue="" disabled> -- Select Impact -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+                <option *ngFor="let impact of selectors.impact" [ngValue]="impact.charId">{{impact.description}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Likelyhood</label>
+            <label for="division" class="col-sm-2 col-form-label">Likelihood</label>
             <div class="col-sm-5">
-              <select class="form-control" name="division" [(ngModel)]="state.expectedRisk.likelihood" (change)="changeQualitativeImpact()">
-                <option ngValue="" disabled> -- Select Likelyhood -- </option>
-                <option *ngFor="let qualitativeImpact of selectors.qualitativeImpact" [ngValue]="qualitativeImpact.charId">{{qualitativeImpact.description}}</option>
+              <select class="form-control" name="division" [(ngModel)]="state.expectedRisk.likelihood" (change)="changeLikelihood()">
+                <option ngValue="" disabled> -- Select Likelihood -- </option>
+                <option *ngFor="let likelihood of selectors.likelihood" [ngValue]="likelihood.charId">{{likelihood.description}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="division" class="col-sm-2 col-form-label">Overall Inherent Risk</label>
+            <label for="division" class="col-sm-2 col-form-label">Overall</label>
             <div class="col-sm-5">
               <span>{{ state.expectedRisk.overall }}</span>
             </div>
@@ -327,6 +330,6 @@
 
   </nb-card-body>
   <nb-card-footer>
-    <button type="submit" class="btn btn-danger">Save to Draft</button>
+    <button type="submit" class="btn btn-danger" (click)="saveRiskRegister()">Save to Draft</button>
   </nb-card-footer>
 </nb-card>
