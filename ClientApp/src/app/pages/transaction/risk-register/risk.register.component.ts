@@ -221,7 +221,7 @@ export class RiskRegisterComponent {
        const c = parseInt(indicator.substring(3,6));
        console.log(b+" vs "+c);
        if(b > c){
-         bigest = indicator;
+         biggest = indicator;
        }  
      }
     });
@@ -239,11 +239,11 @@ export class RiskRegisterComponent {
   }
 
   changeInherentLikelihood(){
-    console.log(this.state.inherentRisk.likelihood);
-      // let biggest = this.getBiggestRiskImpact([this.state.inherentRisk.likelihood, this.state.inherentRisk.impact.indicatorId]);
-      // console.log(biggest, this.state.inherentRisk.likelihood);
-      // const impact = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP' && object.indicatorId == biggest)});
-      // this.state.inherentRisk.overall = impact;
+
+      let biggest = this.getBiggestRiskImpact([ this.state.inherentRisk.impact.indicatorId, this.state.inherentRisk.likelihood]);
+      console.log(biggest, this.state.inherentRisk.likelihood);
+      const overall = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'OVR' && object.indicatorId.substring(3,6) == biggest.substring(3,6))});
+      this.state.inherentRisk.overall = overall;
   }
 
   changeDivision(){
