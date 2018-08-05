@@ -29,7 +29,7 @@ namespace tam_risk_project
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            var connection = @"Server=127.0.0.1,1433;Database=TAM_PROJECT;User Id=sa;Password=Rahasia#18;";
+            var connection = @"Server=DESKTOP-4EQ1AF6\SQLEXPRESS;Database=TAM_PROJECT;User Id=hamid;Password=hamid123;Trusted_Connection=True;";
             services.AddDbContext<TAM_PROJECTContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
 
@@ -48,13 +48,14 @@ namespace tam_risk_project
                         {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
-                spa.Options.StartupTimeout = TimeSpan.FromSeconds(6000);
+                
 
                 spa.Options.SourcePath = "ClientApp";
               
 
                             if (env.IsDevelopment())
                             {
+                                spa.Options.StartupTimeout = TimeSpan.FromSeconds(6000);
                                 spa.UseAngularCliServer(npmScript: "start");
                             }
                         });
