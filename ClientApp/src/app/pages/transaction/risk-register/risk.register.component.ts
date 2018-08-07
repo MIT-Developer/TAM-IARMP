@@ -78,14 +78,15 @@ export class RiskRegisterComponent {
     qualitativeImpact: [],
     operation : [],
     impact: [],
-    likelihood: []
+    likelihood: [],
+    appropriate: []
   }
 
   state : any = {
     filled: false,
     document:{
       risk_period : moment().format('YYYY'),
-      register_no : 'ASM/ASBD-01'
+      register_no : ''
     },
     division:{
       division: '',
@@ -148,6 +149,8 @@ export class RiskRegisterComponent {
     financialImpact: [],
     libraries: []
   }
+
+  riskAssessmentData: any =[]
    
   constructor(
     private modalService: NgbModal,
@@ -177,6 +180,7 @@ export class RiskRegisterComponent {
       this.selectors.operation = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'OPR')});
       this.selectors.impact = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP')});
       this.selectors.likelihood = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'LKL')});
+      this.selectors.appropriate = this.data.riskIndicators.filter(object => {return (object.flagActive == 'Active' &&  object.condition == 'APR')});
     });
     //get Department
     this.service.getreq("tbmlibraries").subscribe(response => {
@@ -206,7 +210,12 @@ export class RiskRegisterComponent {
       this.data.libraries = response;
       
     });
-    console.log(this.selectors);
+    this.service.getreq("TbRRiskAssessments").subscribe(response => {
+      if (response != null) {
+        this.riskAssessmentData = response;
+      }
+      console.log(this.riskAssessmentData);
+    });
   }
 
   getBiggestRiskImpact(list){
@@ -246,12 +255,42 @@ export class RiskRegisterComponent {
       this.state.inherentRisk.overall = overall;
   }
 
+  changeExpectedImpact(){
+    let biggest = this.getBiggestRiskImpact([ this.state.expectedRisk.impact, this.state.expectedRisk.likelihood]);
+    const overall = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'OVR' && object.indicatorId.substring(3,6) == biggest.substring(3,6))});
+    this.state.expectedRisk.overall = overall;
+  }
+
+  changeExpectedLikelihood(){
+
+      let biggest = this.getBiggestRiskImpact([ this.state.expectedRisk.impact, this.state.expectedRisk.likelihood]);
+      const overall = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'OVR' && object.indicatorId.substring(3,6) == biggest.substring(3,6))});
+      this.state.residualRisk.overall = overall;
+  }
+
+  changeResidualImpact(){
+    let biggest = this.getBiggestRiskImpact([this.state.residualRisk.strategic]);
+    const impact = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'IMP' && object.indicatorId == biggest)});
+    this.state.residualRisk.impact = impact;
+  }
+
+  changeResidualLikelihood(){
+     console.log(" selected: ",this.state.residualRisk.likelihood);
+      let biggest = this.getBiggestRiskImpact([ this.state.residualRisk.impact.indicatorId, this.state.residualRisk.likelihood]);
+      const overall = this.data.riskIndicators.find(object => {return (object.flagActive == 'Active' &&  object.condition == 'OVR' && object.indicatorId.substring(3,6) == biggest.substring(3,6))});
+      this.state.residualRisk.overall = overall;
+  }
+
   changeDivision(){
     this.selectors.department = this.data.department.filter(object=> {return (object.kodeDivisi == this.state.division.division)});
+    this.state.division.department = '';
+     const lastIndex = this.generateCounter()+1;
+    this.state.document.register_no = this.riskNoGenerate(lastIndex);
   }
 
   changeDepartment(){
-    console.log("department Change to", this.state.department);
+    const lastIndex = this.generateCounter();
+    this.state.document.register_no = this.riskNoGenerate(lastIndex);
   }
 
   changeCompanyKpi(){
@@ -268,6 +307,53 @@ export class RiskRegisterComponent {
 
   saveRiskRegister(){
     console.log(this.state);
+  }
+
+  generateCounter() {
+    let lastIndex = 0;
+    console.log(this.state.division.division,this.state.division.department,this.state.document.risk_period);
+    for (let data in this.riskAssessmentData) {
+      if (
+        this.riskAssessmentData[data].yearActive == this.state.document.risk_period &&
+        this.riskAssessmentData[data].division ==
+          this.state.division.division &&
+        this.riskAssessmentData[data].department ==
+          this.state.division.department
+      ) {
+        lastIndex <= this.riskAssessmentData[data].counterNo
+          ? (lastIndex = this.riskAssessmentData[data].counterNo)
+          : null;
+      }
+    }
+    return lastIndex;
+  }
+
+  riskNoGenerate(lastIndex) {
+    switch (lastIndex.toString().length) {
+      case 2:
+        return (
+          this.state.division.division +
+          "/" +
+          this.state.division.department +
+          "-" +
+          lastIndex.toString()
+        );
+
+      case 1:
+        return (
+          this.state.division.division +
+          "/" +
+          this.state.division.department +
+          "-" +
+          "0" +
+          lastIndex.toString()
+        );
+    }
+  }
+
+  save(){
+    console.log("data saved..!");
+    this.toastr.success("Data Saved!");
   }
 
 }
